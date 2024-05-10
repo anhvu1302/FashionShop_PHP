@@ -32,7 +32,7 @@
                             <div class="mb-2 text-danger text-center bg-white rounded rounded-1 p-2">
                                 Tên tài khoản hoặc mật khẩu không đúng
                             </div>
-                            <form class="">
+                            <form class="" action="" method="post">
                                 <div class="mb-3">
                                     <label class="form-label" for="email">Tên tài khoản - Email</label>
                                     <input name="email" placeholder="Nhập tên tài khoản hoặc email" type="email" id="email" class="form-control" />

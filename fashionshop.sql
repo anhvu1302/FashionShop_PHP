@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1:3306
--- Thời gian đã tạo: Th5 10, 2024 lúc 08:33 AM
+-- Thời gian đã tạo: Th5 10, 2024 lúc 11:33 AM
 -- Phiên bản máy phục vụ: 8.0.35
 -- Phiên bản PHP: 8.2.12
 
@@ -31,62 +31,64 @@ CREATE TABLE `tbl_account` (
   `account_id` int NOT NULL,
   `username` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `account_type` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `account_type` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_verified` bit(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `tbl_account`
 --
 
-INSERT INTO `tbl_account` (`account_id`, `username`, `password`, `account_type`) VALUES
-(1, 'admin', 'e6e061838856bf47e1de730719fb2609', 'admin'),
-(2, 'admin1', 'e6e061838856bf47e1de730719fb2609', 'admin'),
-(3, 'admin2', 'e6e061838856bf47e1de730719fb2609', 'admin'),
-(4, 'customer1', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(5, 'customer2', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(6, 'customer3', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(7, 'customer4', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(8, 'customer5', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(9, 'customer6', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(10, 'customer7', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(11, 'customer8', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(12, 'customer9', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(13, 'customer10', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(14, 'customer11', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(15, 'customer12', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(16, 'customer13', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(17, 'customer14', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(18, 'customer15', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(19, 'customer16', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(20, 'customer17', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(21, 'customer18', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(22, 'customer19', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(23, 'customer20', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(24, 'customer21', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(25, 'customer22', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(26, 'customer23', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(27, 'customer24', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(28, 'customer25', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(29, 'customer26', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(30, 'customer27', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(31, 'customer28', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(32, 'customer29', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(33, 'customer30', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(34, 'customer31', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(35, 'customer32', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(36, 'customer33', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(37, 'customer34', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(38, 'customer35', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(39, 'customer36', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(40, 'customer37', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(41, 'customer38', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(42, 'customer39', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(43, 'customer40', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(44, 'customer41', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(45, 'customer42', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(46, 'customer43', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(47, 'customer44', 'e6e061838856bf47e1de730719fb2609', 'user'),
-(48, 'customer45', 'e6e061838856bf47e1de730719fb2609', 'user');
+INSERT INTO `tbl_account` (`account_id`, `username`, `password`, `token`, `account_type`, `is_verified`) VALUES
+(1, 'admin', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'admin', b'1'),
+(2, 'admin1', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'admin', b'1'),
+(3, 'admin2', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'admin', b'1'),
+(4, 'customer1', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(5, 'customer2', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(6, 'customer3', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(7, 'customer4', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(8, 'customer5', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(9, 'customer6', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(10, 'customer7', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(11, 'customer8', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(12, 'customer9', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(13, 'customer10', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(14, 'customer11', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(15, 'customer12', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(16, 'customer13', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(17, 'customer14', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(18, 'customer15', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(19, 'customer16', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(20, 'customer17', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(21, 'customer18', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(22, 'customer19', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(23, 'customer20', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(24, 'customer21', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(25, 'customer22', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(26, 'customer23', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(27, 'customer24', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(28, 'customer25', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(29, 'customer26', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(30, 'customer27', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(31, 'customer28', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(32, 'customer29', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(33, 'customer30', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(34, 'customer31', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(35, 'customer32', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(36, 'customer33', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(37, 'customer34', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(38, 'customer35', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(39, 'customer36', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(40, 'customer37', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(41, 'customer38', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(42, 'customer39', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(43, 'customer40', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(44, 'customer41', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(45, 'customer42', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(46, 'customer43', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(47, 'customer44', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
+(48, 'customer45', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1');
 
 -- --------------------------------------------------------
 
@@ -470,13 +472,13 @@ ALTER TABLE `tbl_product_type`
 -- AUTO_INCREMENT cho bảng `tbl_account`
 --
 ALTER TABLE `tbl_account`
-  MODIFY `account_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `account_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_account_details`
 --
 ALTER TABLE `tbl_account_details`
-  MODIFY `account_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `account_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_comment`

@@ -24,7 +24,7 @@ $ss_admin = 'admin';
 $ss_user = 'user';
 
 // Defining base url
-define("BASE_URL", "http://localhost/fashionshop/");
+define("BASE_URL", "http://localhost/FashionShop_PHP/");
 
 // Getting Admin url
 define("ADMIN_URL", BASE_URL . "admin" . "/");
