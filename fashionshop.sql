@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1:3306
--- Thời gian đã tạo: Th5 10, 2024 lúc 07:13 AM
+-- Thời gian đã tạo: Th5 10, 2024 lúc 08:33 AM
 -- Phiên bản máy phục vụ: 8.0.35
 -- Phiên bản PHP: 8.2.12
 
@@ -97,10 +97,10 @@ INSERT INTO `tbl_account` (`account_id`, `username`, `password`, `account_type`)
 CREATE TABLE `tbl_account_details` (
   `account_id` int NOT NULL,
   `customer_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `gender` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `date_of_birth` date NOT NULL,
-  `address` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` char(11) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gender` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date_of_birth` date DEFAULT NULL,
+  `address` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` char(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
