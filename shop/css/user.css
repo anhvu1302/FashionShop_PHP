@@ -1,0 +1,83 @@
+.user-infor{
+    padding-top: 8rem;
+}
+
+.user-infor table {
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+.user-infor table th {
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    padding: 10px 5px;
+}
+.user-infor table tbody td input,
+.user-infor table tbody td button{
+    width: 80%;
+    background-color: transparent;
+}
+.user-infor table tbody td input:focus {
+    outline: none; /* Loại bỏ viền mặc định khi focus (đôi khi trình duyệt có thể áp dụng một viền mặc định) */
+    border: 1px solid #47a2d3;
+    border-radius: 5px;
+}
+.user-infor table tbody td button:hover{
+    border-radius: 5px;
+    background: #130f40;
+    color: white;
+}
+.user-infor table tbody td i{
+    margin-left: 2rem;
+}
+.user-infor table{
+    font-size: 2rem;
+}
+.user-infor table td:first-child {
+    font-weight: bold;
+    text-align: right;
+}
+#change-pass td{
+    width: 50%;
+}
+#change-pass td input {
+    width: unset;
+    background-color: transparent;
+    border: 1px solid #ced4da;
+    border-radius: 0.375rem;
+}
+#change-pass td input:focus {
+    outline: none; /* Loại bỏ viền mặc định khi focus (đôi khi trình duyệt có thể áp dụng một viền mặc định) */
+    border: 1px solid #47a2d3;
+}
+
+#change-pass tr:last-child td button{
+    width: 30%;
+    display: block;
+    margin: auto;
+}
+.list-order {
+    font-size: 2rem;
+}
+.list-order table{
+    width: 60%;
+}
+.list-order table h3{
+    font-size: 2rem;
+    margin: 0.2rem;
+}
+.list-order table thead tr{
+    background-color: #cdcdcd;
+
+}
+.list-order table tfoot button{
+    background-color: transparent;
+    padding: 0.4rem;
+
+}
+.list-order table tfoot button:hover{
+    
+    border-radius: 5px;
+    background: #130f40;
+    color: white;
+}
