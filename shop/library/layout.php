@@ -152,7 +152,6 @@
 
         <section class="home" id="home">
             <div id="demo" class="carousel" data-bs-ride="carousel">
-                <!-- The slideshow/carousel -->
                 <div class="carousel-inner">
                     <div class="carousel-item">
                         <img src="https://raw.githubusercontent.com/anhvu13/fashion.github.io/main/banner1.jpg" alt="Los Angeles" class="d-block" style="width: 100%">
@@ -179,8 +178,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Left and right controls/icons -->
                 <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon"></span>
                 </button>
