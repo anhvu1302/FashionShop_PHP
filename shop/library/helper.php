@@ -21,6 +21,33 @@
         return $connection;
     }
 
+    function renderType($array, $largest)
+    {
+        for($index = 0; $index < sizeof($array) + 1; $index = $index + 1)
+        {
+            if($index == sizeof($array)) 
+            {
+                ?><td colspan="<?php echo $largest - sizeof($array) ?>"></td><?php
+                break;
+            }
+            else 
+            {
+                $item = $array[$index];
+                ?><td style="width: 200px; text-align: center"><a style="text-decoration: none; margin-right: 10px;" href="display.php?type=<?php echo $item["product_type_id"] ?>" class="buttons"><?php echo $item["product_type_name"] ?></a></td><?php
+            }
+        }
+    }
+
+    function addEmpty($array, $length)
+    {
+        for($index = 0; $index < $length - sizeof($array); $index = $index + 1)
+        {
+            $array[] = array("", "", "");
+        }
+
+        return $array;
+    }
+
     function showLineBreak($string)
     {
         $demon = chr(0x5C);

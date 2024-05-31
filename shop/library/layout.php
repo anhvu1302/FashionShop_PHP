@@ -2,6 +2,22 @@
 
     function addHeader()
     {
+        $connection = connectDatabase();
+
+        $query = "select * from tbl_product_type";
+        $statement = $connection->prepare($query);
+        $statement->execute();
+
+        $male = [];
+        $female = [];
+        $accessory = [];
+
+        while($item = $statement->fetch())
+        {
+            if($item["product_category"] == "Nam") $male[] = $item;
+            else if ($item["product_category"] == "Nữ") $female[] = $item;
+            else $accessory[] = $item;
+        }
 
         ?>
 
@@ -11,39 +27,45 @@
                 <ul>
                     <li><a href="index.php">Trang Chủ</a></li>
                     <li>
-                        <a href="#products">sản phẩm</a>
+                        <a href="display.php?type=-1">Sản Phẩm</a>
                         <ul>
                             <li>
-                                <a href="#">Đồ Nam</a>
+                                <a href="display.php?type=-2">Đồ Nam</a>
                                 <ul>
-                                    <li><a href="#">Áo nam</a></li>
-                                    <li><a href="#">Vest - Blazer</a></li>
-                                    <li><a href="#">Quần nam</a></li>
-                                    <li><a href="#">Đồ nữ</a></li>
-                                    <li><a href="#">Áo khoác nam</a></li>
+                                    <?php
+
+                                        foreach($male as $item)
+                                        {
+                                            ?><li><a href="display.php?type=<?php echo $item["product_type_id"] ?>"><?php echo $item["product_type_name"] ?></a></li><?php
+                                        }
+
+                                    ?>
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">Đồ nữ</a>
+                                <a href="display.php?type=-3">Đồ Nữ</a>
                                 <ul>
-                                    <li><a href="#">Áo nữ</a></li>
-                                    <li><a href="#">Áo dài</a></li>
-                                    <li><a href="#">Áo khoác nữ</a></li>
-                                    <li><a href="#">Quần nữ</a></li>
-                                    <li><a href="#">Đầm</a></li>
-                                    <li><a href="#">Váy</a></li>
-                                    <li><a href="#">Chân váy</a></li>
+                                    <?php
+
+                                        foreach($female as $item)
+                                        {
+                                            ?><li><a href="display.php?type=<?php echo $item["product_type_id"] ?>"><?php echo $item["product_type_name"] ?></a></li><?php
+                                        }
+
+                                    ?>
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">Phụ kiện</a>
+                                <a href="display.php?type=-4">Phụ Kiện</a>
                                 <ul>
-                                    <li><a href="#">Mắt Kính</a></li>
-                                    <li><a href="#">Giày - Dép</a></li>
-                                    <li><a href="#">Mũ - Nón</a></li>
-                                    <li><a href="#">Vớ - Tất</a></li>
-                                    <li><a href="#">Thắt Lưng</a></li>
-                                    <li><a href="#">Túi - Ví</a></li>
+                                    <?php
+
+                                        foreach($accessory as $item)
+                                        {
+                                            ?><li><a href="display.php?type=<?php echo $item["product_type_id"] ?>"><?php echo $item["product_type_name"] ?></a></li><?php
+                                        }
+
+                                    ?>
                                 </ul>
                             </li>
                         </ul>
