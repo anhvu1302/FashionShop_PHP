@@ -9,7 +9,7 @@
             <a href="index.php" class="logo"> <i class="fas fa-shopping-cart"></i> shop </a>
             <nav class="navbar">
                 <ul>
-                    <li><a href="#home">trang chủ</a></li>
+                    <li><a href="index.php">Trang Chủ</a></li>
                     <li>
                         <a href="#products">sản phẩm</a>
                         <ul>

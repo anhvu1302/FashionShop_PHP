@@ -129,7 +129,6 @@
   width: 5rem;
 }
 
-/* Tùy chỉnh dấu mũi tên */
 .products .product-details-right .number-product #quantity::-webkit-inner-spin-button,
 .products .product-details-right .number-product #quantity::-webkit-outer-spin-button {
   height: 2rem;
@@ -188,4 +187,42 @@
 .products .product-details-right .tab-float .tab-content {
   display: none;
   font-size: 1.3rem;
+}
+
+.color{
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.circle{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 10px;
+}
+
+.size{
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.quantity{
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
