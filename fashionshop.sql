@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 31, 2024 at 10:29 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th5 31, 2024 lúc 01:27 PM
+-- Phiên bản máy phục vụ: 10.4.32-MariaDB
+-- Phiên bản PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `fashionshop`
+-- Cơ sở dữ liệu: `fashionshop`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_account`
+-- Cấu trúc bảng cho bảng `tbl_account`
 --
 
 CREATE TABLE `tbl_account` (
@@ -37,7 +37,7 @@ CREATE TABLE `tbl_account` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `tbl_account`
+-- Đang đổ dữ liệu cho bảng `tbl_account`
 --
 
 INSERT INTO `tbl_account` (`account_id`, `username`, `password`, `token`, `account_type`, `is_verified`) VALUES
@@ -93,7 +93,7 @@ INSERT INTO `tbl_account` (`account_id`, `username`, `password`, `token`, `accou
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_account_details`
+-- Cấu trúc bảng cho bảng `tbl_account_details`
 --
 
 CREATE TABLE `tbl_account_details` (
@@ -107,7 +107,7 @@ CREATE TABLE `tbl_account_details` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `tbl_account_details`
+-- Đang đổ dữ liệu cho bảng `tbl_account_details`
 --
 
 INSERT INTO `tbl_account_details` (`account_id`, `customer_name`, `gender`, `date_of_birth`, `address`, `phone`, `email`) VALUES
@@ -163,7 +163,7 @@ INSERT INTO `tbl_account_details` (`account_id`, `customer_name`, `gender`, `dat
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_comment`
+-- Cấu trúc bảng cho bảng `tbl_comment`
 --
 
 CREATE TABLE `tbl_comment` (
@@ -175,7 +175,7 @@ CREATE TABLE `tbl_comment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `tbl_comment`
+-- Đang đổ dữ liệu cho bảng `tbl_comment`
 --
 
 INSERT INTO `tbl_comment` (`comment_id`, `customer_id`, `product_id`, `rating`, `comment`) VALUES
@@ -193,7 +193,7 @@ INSERT INTO `tbl_comment` (`comment_id`, `customer_id`, `product_id`, `rating`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_invoice`
+-- Cấu trúc bảng cho bảng `tbl_invoice`
 --
 
 CREATE TABLE `tbl_invoice` (
@@ -207,7 +207,7 @@ CREATE TABLE `tbl_invoice` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `tbl_invoice`
+-- Đang đổ dữ liệu cho bảng `tbl_invoice`
 --
 
 INSERT INTO `tbl_invoice` (`invoice_id`, `customer_id`, `total`, `date`, `note`, `address`, `phone`) VALUES
@@ -222,7 +222,7 @@ INSERT INTO `tbl_invoice` (`invoice_id`, `customer_id`, `total`, `date`, `note`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_invoice_details`
+-- Cấu trúc bảng cho bảng `tbl_invoice_details`
 --
 
 CREATE TABLE `tbl_invoice_details` (
@@ -234,7 +234,7 @@ CREATE TABLE `tbl_invoice_details` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `tbl_invoice_details`
+-- Đang đổ dữ liệu cho bảng `tbl_invoice_details`
 --
 
 INSERT INTO `tbl_invoice_details` (`invoice_id`, `product_id`, `quantity`, `price`, `commented`) VALUES
@@ -259,7 +259,7 @@ INSERT INTO `tbl_invoice_details` (`invoice_id`, `product_id`, `quantity`, `pric
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_product`
+-- Cấu trúc bảng cho bảng `tbl_product`
 --
 
 CREATE TABLE `tbl_product` (
@@ -273,7 +273,7 @@ CREATE TABLE `tbl_product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `tbl_product`
+-- Đang đổ dữ liệu cho bảng `tbl_product`
 --
 
 INSERT INTO `tbl_product` (`product_id`, `product_name`, `product_description`, `product_price`, `product_discount`, `product_rating`, `product_type_id`) VALUES
@@ -313,68 +313,68 @@ INSERT INTO `tbl_product` (`product_id`, `product_name`, `product_description`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_product_style`
+-- Cấu trúc bảng cho bảng `tbl_product_style`
 --
 
 CREATE TABLE `tbl_product_style` (
   `product_id` int(11) NOT NULL,
   `product_color` varchar(50) NOT NULL,
-  `product_image` varchar(50) NOT NULL,
+  `product_image` varchar(200) NOT NULL,
   `product_size` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `tbl_product_style`
+-- Đang đổ dữ liệu cho bảng `tbl_product_style`
 --
 
 INSERT INTO `tbl_product_style` (`product_id`, `product_color`, `product_image`, `product_size`) VALUES
-(1, 'đen', 'product_img1_den.jpg|product_img1_compact1_den.jpg', 'M|L'),
-(1, 'trắng', 'product_img1.jpg|product_img1_compact1.jpg|product', 'M|L'),
-(2, 'trắng', 'product_img2.jpg|product_img2_compact1.jpg|product', 'S|M|L|XL|XXL'),
-(2, 'xanh tím than', 'product_img2_xanhtimthan.jpg|product_img2_compact1', 'S|M|L|XL|XXL'),
-(3, 'đỏ', 'product_img3_do.jpg|product_img3_compact1_do.jpg|p', 'S|M|L'),
-(3, 'kem', 'product_img3.jpg|product_img3_compact1.jpg|product', 'S|M|L'),
-(4, 'đen', 'product_img4.jpg|product_img4_compact1.jpg|product', '38|39|40|41|42|43'),
-(5, 'be', 'product_img5.jpg|product_img5_compact1.jpg|product', 'M|L'),
-(5, 'đen', 'product_img5_den.jpg|product_img5_compact1_den.jpg', 'M|L'),
-(6, 'SB194', 'product_img6.jpg|product_img6_compact1.jpg|product', 'S|L|XL'),
-(7, 'be', 'product_img7.jpg|product_img7_compact1.jpg|product', 'S|M|L'),
-(7, 'den', 'product_img7_den.jpg|product_img7_compact1_den.jpg', 'S|M|L'),
-(7, 'nau', 'product_img7_nau.jpg|product_img7_compact1_nau.jpg', 'S|M|L'),
-(8, 'green', 'product_img8.jpg|product_img8_compact1.jpg|product', '36|37|38|39|40|41|42|43|44|45|46'),
-(9, 'trangxam', 'product_img9.jpg|product_img9_compact1.jpg|product', 'M'),
-(10, 'den', 'product_img10_den.jpg|product_img10_compact1_den.j', ' '),
-(10, 'greyblue', 'product_img10.jpg|product_img10_compact1.jpg|produ', ' '),
-(10, 'nau', 'product_img10_nau.jpg|product_img10_compact1_nau.j', ''),
-(11, 'Caro đen', 'product_img11_den.jpg|product_img11_compact1_den.j', 'S|M|L'),
-(11, 'Caro nâu', 'product_img11.jpg|product_img11_compact1.jpg', 'S|M|L'),
-(12, 'đen', 'product_img12.jpg|product_img12_compact1.jpg|produ', 'S|M|L'),
-(13, 'đen', 'product_img13_den.jpg|product_img13_compact1_den.j', 'S|M|L'),
-(13, 'xanh', 'product_img13.jpg|product_img13_compact1.jpg|produ', 'S|M|L'),
-(14, 'tim', 'product_img14.jpg|product_img14_compact1.jpg|produ', 'S|M|L'),
-(15, 'trang', 'product_img15.jpg|product_img15_compact1.jpg| prod', 'F (Freesize)'),
-(16, 'do', 'product_img16.jpg|product_img16_compact1.jpg|produ', 'S|M|L'),
-(17, 'den', 'product_img17.jpg|product_img17_compact1.jpg|produ', 'S|M|L'),
-(18, 'trang|den', 'product_img18.jpg|product_img18_compact1.jpg| prod', 'S|M|L'),
-(19, 'den', 'product_img19.jpg|product_img19_compact1.jpg|produ', 'S|M|L'),
-(20, 'den|trang', 'product_img20.jpg|product_img20_compact1.jpg|produ', 'S|M|L'),
-(21, 'den', 'product_img21.jpg|product_img21_compact1.jpg|produ', 'L|XL|XXL'),
-(22, 'den', 'product_img22.jpg|product_img22_compact1.jpg|produ', 'S|M|L|XL'),
-(23, 'trang|kem', 'product_img23.jpg|product_img23_compact1.jpg|produ', 'S|M|L'),
-(24, 'den|nau', 'product_img24.jpg|product_img24_compact1.jpg|produ', 'S|M|L'),
-(25, 'den|nau', 'product_img25.jpg|product_img25_compact1.jpg|produ', 'L|XL|XXL'),
-(26, 'trang', 'product_img26.jpg|product_img26_compact1.jpg|produ', ' '),
-(27, 'den', 'product_img27.jpg|product_img27_compact1.jpg|produ', ' '),
-(28, 'den|trang', 'product_img28.jpg|product_img28_compact1.jpg|produ', 'L|XL|XXL'),
-(29, 'xanh|cam|den|kem', 'product_img29.jpg|product_img29_compact1.jpg|produ', 'S|M|L'),
-(30, 'den|kem', 'product_img30.jpg|product_img30_compact1.jpg|produ', 'S|M'),
-(31, 'xanh|kem|den', 'product_img31.jpg|product_img31_compact1.jpg|produ', 'S|M'),
-(32, 'den|trang|kem', 'product_img32.jpg|product_img32_compact1.jpg|produ', 'S');
+(1, 'đen', 'product_img1_den.jpg|product_img1_compact1_den.jpg||product_img1_compact2_den.jpg', 'M|L'),
+(1, 'trắng', 'product_img1.jpg|product_img1_compact1.jpg|product_img1_compact2.jpg', 'M|L'),
+(2, 'trắng', 'product_img2.jpg|product_img2_compact1.jpg|product_img2_compact2.jpg', 'S|M|L|XL|XXL'),
+(2, 'xanh tím than', 'product_img2_xanhtimthan.jpg|product_img2_compact1_xanhtimthan.jpg|product_img2_compact2_xanhtimthan.jpg', 'S|M|L|XL|XXL'),
+(3, 'đỏ', 'product_img3_do.jpg|product_img3_compact1_do.jpg|product_img3_compact2_do.jpg', 'S|M|L'),
+(3, 'kem', 'product_img3.jpg|product_img3_compact1.jpg|product_img3_compact2.jpg', 'S|M|L'),
+(4, 'đen', 'product_img4.jpg|product_img4_compact1.jpg|product_img4_compact2.jpg', '38|39|40|41|42|43'),
+(5, 'be', 'product_img5.jpg|product_img5_compact1.jpg|product_img5_compact2.jpg', 'M|L'),
+(5, 'đen', 'product_img5_den.jpg|product_img5_compact1_den.jpg|product_img5_compact2_den.jpg', 'M|L'),
+(6, 'SB194', 'product_img6.jpg|product_img6_compact1.jpg|product_img6_compact2.jpg', 'S|L|XL'),
+(7, 'be', 'product_img7.jpg|product_img7_compact1.jpg|product_img7_compact2.jpg', 'S|M|L'),
+(7, 'den', 'product_img7_den.jpg|product_img7_compact1_den.jpg|product_img7_compact2_den.jpg', 'S|M|L'),
+(7, 'nau', 'product_img7_nau.jpg|product_img7_compact1_nau.jpg|product_img7_compact2_nau.jpg', 'S|M|L'),
+(8, 'green', 'product_img8.jpg|product_img8_compact1.jpg|product_img8_compact2.jpg', '36|37|38|39|40|41|42|43|44|45|46'),
+(9, 'trangxam', 'product_img9.jpg|product_img9_compact1.jpg|product_img9_compact2.jpg', 'M'),
+(10, 'den', 'product_img10_den.jpg|product_img10_compact1_den.jpg|product_img10_compact2_den.jpg', ' '),
+(10, 'greyblue', 'product_img10.jpg|product_img10_compact1.jpg|product_img10_compact2.jpg', ' '),
+(10, 'nau', 'product_img10_nau.jpg|product_img10_compact1_nau.jpg|product_img10_compact2_nau.jpg', ''),
+(11, 'Caro đen', 'product_img11_den.jpg|product_img11_compact1_den.jpg', 'S|M|L'),
+(11, 'Caro nâu', 'product_img11.jpg|product_img11_compact1.jpg|product_img11_compact2.jpg', 'S|M|L'),
+(12, 'đen', 'product_img12.jpg|product_img12_compact1.jpg|product_img12_compact2.jpg', 'S|M|L'),
+(13, 'đen', 'product_img13_den.jpg|product_img13_compact1_den.jpg||product_img13_compact2_den.jpg', 'S|M|L'),
+(13, 'xanh', 'product_img13.jpg|product_img13_compact1.jpg|product_img13_compact2.jpg', 'S|M|L'),
+(14, 'tim', 'product_img14.jpg|product_img14_compact1.jpg|product_img14_compact2.jpg', 'S|M|L'),
+(15, 'trang', 'product_img15.jpg|product_img15_compact1.jpg| product_img15_compact2.jpg', 'F (Freesize)'),
+(16, 'do', 'product_img16.jpg|product_img16_compact1.jpg|product_img16_compact2.jpg', 'S|M|L'),
+(17, 'den', 'product_img17.jpg|product_img17_compact1.jpg|product_img17_compact2.jpg', 'S|M|L'),
+(18, 'trang|den', 'product_img18.jpg|product_img18_compact1.jpg| product_img18_compact2.jpg', 'S|M|L'),
+(19, 'den', 'product_img19.jpg|product_img19_compact1.jpg|product_img19_compact2.jpg', 'S|M|L'),
+(20, 'den|trang', 'product_img20.jpg|product_img20_compact1.jpg|product_img20_compact2.jpg', 'S|M|L'),
+(21, 'den', 'product_img21.jpg|product_img21_compact1.jpg|product_img21_compact2.jpg', 'L|XL|XXL'),
+(22, 'den', 'product_img22.jpg|product_img22_compact1.jpg|product_img22_compact2.jpg', 'S|M|L|XL'),
+(23, 'trang|kem', 'product_img23.jpg|product_img23_compact1.jpg|product_img23_compact2.jpg', 'S|M|L'),
+(24, 'den|nau', 'product_img24.jpg|product_img24_compact1.jpg|product_img24_compact2.jpg', 'S|M|L'),
+(25, 'den|nau', 'product_img25.jpg|product_img25_compact1.jpg|product_img25_compact2.jpg', 'L|XL|XXL'),
+(26, 'trang', 'product_img26.jpg|product_img26_compact1.jpg|product_img26_compact2.jpg', ' '),
+(27, 'den', 'product_img27.jpg|product_img27_compact1.jpg|product_img27_compact2.jpg', ' '),
+(28, 'den|trang', 'product_img28.jpg|product_img28_compact1.jpg|product_img28_compact2.jpg', 'L|XL|XXL'),
+(29, 'xanh|cam|den|kem', 'product_img29.jpg|product_img29_compact1.jpg|product_img29_compact2.jpg', 'S|M|L'),
+(30, 'den|kem', 'product_img30.jpg|product_img30_compact1.jpg|product_img30_compact2.jpg', 'S|M'),
+(31, 'xanh|kem|den', 'product_img31.jpg|product_img31_compact1.jpg|product_img31_compact2.jpg', 'S|M'),
+(32, 'den|trang|kem', 'product_img32.jpg|product_img32_compact1.jpg|product_img32_compact2.jpg', 'S');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_product_type`
+-- Cấu trúc bảng cho bảng `tbl_product_type`
 --
 
 CREATE TABLE `tbl_product_type` (
@@ -384,7 +384,7 @@ CREATE TABLE `tbl_product_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `tbl_product_type`
+-- Đang đổ dữ liệu cho bảng `tbl_product_type`
 --
 
 INSERT INTO `tbl_product_type` (`product_type_id`, `product_type_name`, `product_category`) VALUES
@@ -401,32 +401,32 @@ INSERT INTO `tbl_product_type` (`product_type_id`, `product_type_name`, `product
 (11, 'Chân váy', 'Nữ'),
 (12, 'Quần', 'Nữ'),
 (13, 'Áo', 'Nữ'),
-(14, 'Mắt kính', 'Phụ Kiện'),
-(15, 'Giày - Dép', 'Phụ Kiện'),
-(16, 'Mũ - Nón', 'Phụ Kiện'),
-(17, 'Vớ - Tất', 'Phụ Kiện'),
-(18, 'Túi - Ví', 'Phụ Kiện'),
-(19, 'Thắt lưng', 'Phụ Kiện'),
-(20, 'Đồng hồ', 'Phụ Kiện');
+(14, 'Mắt kính', 'Phụ kiện'),
+(15, 'Giày - Dép', 'Phụ kiện'),
+(16, 'Mũ - Nón', 'Phụ kiện'),
+(17, 'Vớ - Tất', 'Phụ kiện'),
+(18, 'Túi - Ví', 'Phụ kiện'),
+(19, 'Thắt lưng', 'Phụ kiện'),
+(20, 'Đồng hồ', 'Phụ kiện');
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `tbl_account`
+-- Chỉ mục cho bảng `tbl_account`
 --
 ALTER TABLE `tbl_account`
   ADD PRIMARY KEY (`account_id`);
 
 --
--- Indexes for table `tbl_account_details`
+-- Chỉ mục cho bảng `tbl_account_details`
 --
 ALTER TABLE `tbl_account_details`
   ADD PRIMARY KEY (`account_id`);
 
 --
--- Indexes for table `tbl_comment`
+-- Chỉ mục cho bảng `tbl_comment`
 --
 ALTER TABLE `tbl_comment`
   ADD PRIMARY KEY (`comment_id`),
@@ -434,120 +434,120 @@ ALTER TABLE `tbl_comment`
   ADD KEY `product_id` (`product_id`);
 
 --
--- Indexes for table `tbl_invoice`
+-- Chỉ mục cho bảng `tbl_invoice`
 --
 ALTER TABLE `tbl_invoice`
   ADD PRIMARY KEY (`invoice_id`),
   ADD KEY `customer_id` (`customer_id`);
 
 --
--- Indexes for table `tbl_invoice_details`
+-- Chỉ mục cho bảng `tbl_invoice_details`
 --
 ALTER TABLE `tbl_invoice_details`
   ADD PRIMARY KEY (`invoice_id`,`product_id`);
 
 --
--- Indexes for table `tbl_product`
+-- Chỉ mục cho bảng `tbl_product`
 --
 ALTER TABLE `tbl_product`
   ADD PRIMARY KEY (`product_id`),
   ADD KEY `product_type_id` (`product_type_id`);
 
 --
--- Indexes for table `tbl_product_style`
+-- Chỉ mục cho bảng `tbl_product_style`
 --
 ALTER TABLE `tbl_product_style`
   ADD PRIMARY KEY (`product_id`,`product_color`);
 
 --
--- Indexes for table `tbl_product_type`
+-- Chỉ mục cho bảng `tbl_product_type`
 --
 ALTER TABLE `tbl_product_type`
   ADD PRIMARY KEY (`product_type_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `tbl_account`
+-- AUTO_INCREMENT cho bảng `tbl_account`
 --
 ALTER TABLE `tbl_account`
   MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
--- AUTO_INCREMENT for table `tbl_account_details`
+-- AUTO_INCREMENT cho bảng `tbl_account_details`
 --
 ALTER TABLE `tbl_account_details`
   MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
--- AUTO_INCREMENT for table `tbl_comment`
+-- AUTO_INCREMENT cho bảng `tbl_comment`
 --
 ALTER TABLE `tbl_comment`
   MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `tbl_invoice`
+-- AUTO_INCREMENT cho bảng `tbl_invoice`
 --
 ALTER TABLE `tbl_invoice`
   MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `tbl_product`
+-- AUTO_INCREMENT cho bảng `tbl_product`
 --
 ALTER TABLE `tbl_product`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
--- AUTO_INCREMENT for table `tbl_product_style`
+-- AUTO_INCREMENT cho bảng `tbl_product_style`
 --
 ALTER TABLE `tbl_product_style`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
--- AUTO_INCREMENT for table `tbl_product_type`
+-- AUTO_INCREMENT cho bảng `tbl_product_type`
 --
 ALTER TABLE `tbl_product_type`
   MODIFY `product_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- Constraints for dumped tables
+-- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Constraints for table `tbl_account_details`
+-- Các ràng buộc cho bảng `tbl_account_details`
 --
 ALTER TABLE `tbl_account_details`
   ADD CONSTRAINT `frn_accountdetails_account` FOREIGN KEY (`account_id`) REFERENCES `tbl_account` (`account_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `tbl_comment`
+-- Các ràng buộc cho bảng `tbl_comment`
 --
 ALTER TABLE `tbl_comment`
   ADD CONSTRAINT `frn_comment_account` FOREIGN KEY (`customer_id`) REFERENCES `tbl_account` (`account_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `frn_comment_product` FOREIGN KEY (`product_id`) REFERENCES `tbl_product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `tbl_invoice`
+-- Các ràng buộc cho bảng `tbl_invoice`
 --
 ALTER TABLE `tbl_invoice`
   ADD CONSTRAINT `tbl_invoice_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `tbl_account` (`account_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `tbl_invoice_details`
+-- Các ràng buộc cho bảng `tbl_invoice_details`
 --
 ALTER TABLE `tbl_invoice_details`
   ADD CONSTRAINT `frn_invoicedetails_invoice` FOREIGN KEY (`invoice_id`) REFERENCES `tbl_invoice` (`invoice_id`);
 
 --
--- Constraints for table `tbl_product`
+-- Các ràng buộc cho bảng `tbl_product`
 --
 ALTER TABLE `tbl_product`
   ADD CONSTRAINT `frn_product_producttype` FOREIGN KEY (`product_type_id`) REFERENCES `tbl_product_type` (`product_type_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `tbl_product_style`
+-- Các ràng buộc cho bảng `tbl_product_style`
 --
 ALTER TABLE `tbl_product_style`
   ADD CONSTRAINT `frn_productstyle_product` FOREIGN KEY (`product_id`) REFERENCES `tbl_product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
