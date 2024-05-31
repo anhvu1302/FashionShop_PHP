@@ -124,13 +124,13 @@
                 $background = '#800080';
                 break;
             default:
-                $background = '#ffffff';
+                $background = "linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet)";
                 break;
         }
 
         ?>
 
-            <a class="circle" style="background-color: <?php echo $background ?>; border: <?php echo $border ?>" href="details.php?id=<?php echo $id ?>&color=<?php echo $color ?>"></a>
+            <a class="circle" style="background: <?php echo $background ?>; border: <?php echo $border ?>" href="details.php?id=<?php echo $id ?>&color=<?php echo $color ?>"></a>
         
         <?php
     }
