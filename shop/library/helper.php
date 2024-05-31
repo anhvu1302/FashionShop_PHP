@@ -23,7 +23,8 @@
 
     function showLineBreak($string)
     {
-        return str_replace("\n", "'\n'", $string);
+        $demon = chr(0x5C);
+        return str_replace($demon . "n", "<br>", $string);
     }
 
     function generateRating($rating) 

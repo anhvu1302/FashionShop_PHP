@@ -142,12 +142,12 @@
                         </div><br>
                         <div class="description">
                             <div style="font-size: 24px;">Thông Tin Sản Phẩm:</div>
-                            <div style="font-size: 16px; text-transform: none"><?php echo showLineBreak($product["product_description"]) ?></div>
+                            <div style="font-size: 16px; text-transform: none; margin-top: 5px"><?php echo showLineBreak($product["product_description"]) ?></div>
                         </div><br>
                         <div class="button_actions">
                             <button type="submit" class="btn btn_base btn_add_cart btn-cart add_to_cart">
                                 <i class="fas fa-shopping-cart"></i>
-                                <span style="margin-left: 30px" class="text_1">Thêm Vào Giỏ Hàng</span>
+                                <span style="margin-left: 30px;" class="text_1">Thêm Vào Giỏ Hàng</span>
                             </button>
                         </div>
                     </form>
