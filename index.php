@@ -25,6 +25,9 @@
 
         include "shop/library/layout.php";
         include "shop/library/main.php";
+        include "shop/library/connect.php";
+
+        $connection = connectDatabase();
 
         addHeader();
 
@@ -37,15 +40,22 @@
     ?>
 
     <section class="products" id="products">
-        <h1 class="heading"><span>Sản phẩm </span>độc quyền</h1>
-        <div class="filter-buttons">
-            <div class="buttons active" data-filter="all">all</div>
-            <div class="buttons" data-filter="arrivals">Sản phẩm mới</div>
-            <div class="buttons" data-filter="featured">Sản phẩm nổi bật</div>
-            <div class="buttons" data-filter="special">Ưu đãi đặc biệt</div>
-            <div class="buttons" data-filter="seller">Bán chạy nhất</div>
-        </div>
+        <h1 class="heading"><span>Sản Phẩm</span>Đặc Biệt</h1>
         <div class="container" id="product-list">
+        <?php
+
+            $query = "select * from tbl_product";
+            $statement = $connection->prepare($query);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            $result = array_slice($result, 0, 5);
+
+            foreach($result as $item)
+            {
+                
+            }
+
+        ?>
         </div>
         <div class="break-page">
         </div>
