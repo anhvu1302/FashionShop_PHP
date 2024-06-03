@@ -1,8 +1,8 @@
 <?php
 ob_start();
 session_start();
-include("inc/config.php");
-include("inc/CSRF_Protect.php");
+include("/App/xampp/htdocs/php2024/lattecrone_v2/FashionShop_PHP/admin/inc/config.php");
+include("/App/xampp/htdocs/php2024/lattecrone_v2/FashionShop_PHP/admin/inc/CSRF_Protect.php");
 $csrf = new CSRF_Protect;
 $error_message = '';
 $success_message = '';
@@ -24,7 +24,7 @@ if (!isset($_SESSION[$ss_admin])) {
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/anhvu13/fashion.github.io/main/icon.png" type="image/x-icon" />
     <title>Admin Dashboard Panel</title>
 
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" /><!--./để ra thư mục gốc(admin) -->
     <link rel="stylesheet" href="../assets/css/admin.min.css">
     <!-- Icon css -->
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/all.css">
@@ -33,7 +33,7 @@ if (!isset($_SESSION[$ss_admin])) {
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-regular.css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-light.css">
 
-    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/jquery.min.js"></script> <!--./để ra thư mục gốc(admin) -->
 
 
 </head>
@@ -69,7 +69,7 @@ if (!isset($_SESSION[$ss_admin])) {
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="./customer.php">
                         <i class="fa-light fa-user"></i>
                         <span class="link-name">Khách Hàng</span>
                     </a>
