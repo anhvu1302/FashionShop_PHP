@@ -1,0 +1,16 @@
+.products{
+    padding: 0;
+    padding-top: 8.6rem;
+}
+.products .search-results{
+    padding-top: 2rem;
+}
+.products .title-search-results{
+    margin-top: 3rem;
+    text-align: center;
+}
+.products .title-search-results strong {
+    color: #eb4d4b;
+    text-decoration: underline;
+    text-transform: lowercase;
+}

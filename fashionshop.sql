@@ -2,9 +2,9 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1:3306
--- Thời gian đã tạo: Th5 10, 2024 lúc 11:33 AM
--- Phiên bản máy phục vụ: 8.0.35
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th5 31, 2024 lúc 01:27 PM
+-- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -28,11 +28,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `tbl_account` (
-  `account_id` int NOT NULL,
-  `username` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `account_type` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `account_id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `account_type` varchar(50) NOT NULL,
   `is_verified` bit(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -97,13 +97,13 @@ INSERT INTO `tbl_account` (`account_id`, `username`, `password`, `token`, `accou
 --
 
 CREATE TABLE `tbl_account_details` (
-  `account_id` int NOT NULL,
-  `customer_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `gender` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `account_id` int(11) NOT NULL,
+  `customer_name` varchar(50) NOT NULL,
+  `gender` varchar(10) DEFAULT NULL,
   `date_of_birth` date DEFAULT NULL,
-  `address` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` char(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
+  `address` varchar(50) DEFAULT NULL,
+  `phone` char(11) DEFAULT NULL,
+  `email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -167,11 +167,11 @@ INSERT INTO `tbl_account_details` (`account_id`, `customer_name`, `gender`, `dat
 --
 
 CREATE TABLE `tbl_comment` (
-  `comment_id` int NOT NULL,
-  `customer_id` int NOT NULL,
-  `product_id` int NOT NULL,
-  `rating` int NOT NULL,
-  `comment` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
+  `comment_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `rating` int(11) NOT NULL,
+  `comment` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -197,13 +197,13 @@ INSERT INTO `tbl_comment` (`comment_id`, `customer_id`, `product_id`, `rating`, 
 --
 
 CREATE TABLE `tbl_invoice` (
-  `invoice_id` int NOT NULL,
-  `customer_id` int NOT NULL,
-  `total` bigint NOT NULL,
+  `invoice_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `total` bigint(20) NOT NULL,
   `date` date NOT NULL,
-  `note` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` int NOT NULL
+  `note` varchar(50) NOT NULL,
+  `address` varchar(200) NOT NULL,
+  `phone` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -226,11 +226,11 @@ INSERT INTO `tbl_invoice` (`invoice_id`, `customer_id`, `total`, `date`, `note`,
 --
 
 CREATE TABLE `tbl_invoice_details` (
-  `invoice_id` int NOT NULL,
-  `product_id` int NOT NULL,
-  `quantity` int NOT NULL,
-  `price` bigint NOT NULL,
-  `commented` tinyint(1) NOT NULL DEFAULT '0'
+  `invoice_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `price` bigint(20) NOT NULL,
+  `commented` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -263,13 +263,13 @@ INSERT INTO `tbl_invoice_details` (`invoice_id`, `product_id`, `quantity`, `pric
 --
 
 CREATE TABLE `tbl_product` (
-  `product_id` int NOT NULL,
-  `product_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `product_description` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `product_price` bigint NOT NULL,
-  `product_discount` int NOT NULL,
-  `product_rating` int NOT NULL,
-  `product_type_id` int NOT NULL
+  `product_id` int(11) NOT NULL,
+  `product_name` varchar(50) NOT NULL,
+  `product_description` varchar(200) NOT NULL,
+  `product_price` bigint(20) NOT NULL,
+  `product_discount` int(11) NOT NULL,
+  `product_rating` int(11) NOT NULL,
+  `product_type_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -317,10 +317,10 @@ INSERT INTO `tbl_product` (`product_id`, `product_name`, `product_description`, 
 --
 
 CREATE TABLE `tbl_product_style` (
-  `product_id` int NOT NULL,
-  `product_color` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `product_image` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `product_size` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
+  `product_id` int(11) NOT NULL,
+  `product_color` varchar(50) NOT NULL,
+  `product_image` varchar(200) NOT NULL,
+  `product_size` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -328,48 +328,48 @@ CREATE TABLE `tbl_product_style` (
 --
 
 INSERT INTO `tbl_product_style` (`product_id`, `product_color`, `product_image`, `product_size`) VALUES
-(1, 'đen', 'product_img1_den.jpg|product_img1_compact1_den.jpg', 'M|L'),
-(1, 'trắng', 'product_img1.jpg|product_img1_compact1.jpg|product', 'M|L'),
-(2, 'trắng', 'product_img2.jpg|product_img2_compact1.jpg|product', 'S|M|L|XL|XXL'),
-(2, 'xanh tím than', 'product_img2_xanhtimthan.jpg|product_img2_compact1', 'S|M|L|XL|XXL'),
-(3, 'đỏ', 'product_img3_do.jpg|product_img3_compact1_do.jpg|p', 'S|M|L'),
-(3, 'kem', 'product_img3.jpg|product_img3_compact1.jpg|product', 'S|M|L'),
-(4, 'đen', 'product_img4.jpg|product_img4_compact1.jpg|product', '38|39|40|41|42|43'),
-(5, 'be', 'product_img5.jpg|product_img5_compact1.jpg|product', 'M|L'),
-(5, 'đen', 'product_img5_den.jpg|product_img5_compact1_den.jpg', 'M|L'),
-(6, 'SB194', 'product_img6.jpg|product_img6_compact1.jpg|product', 'S|L|XL'),
-(7, 'be', 'product_img7.jpg|product_img7_compact1.jpg|product', 'S|M|L'),
-(7, 'den', 'product_img7_den.jpg|product_img7_compact1_den.jpg', 'S|M|L'),
-(7, 'nau', 'product_img7_nau.jpg|product_img7_compact1_nau.jpg', 'S|M|L'),
-(8, 'green', 'product_img8.jpg|product_img8_compact1.jpg|product', '36|37|38|39|40|41|42|43|44|45|46'),
-(9, 'trangxam', 'product_img9.jpg|product_img9_compact1.jpg|product', 'M'),
-(10, 'den', 'product_img10_den.jpg|product_img10_compact1_den.j', ' '),
-(10, 'greyblue', 'product_img10.jpg|product_img10_compact1.jpg|produ', ' '),
-(10, 'nau', 'product_img10_nau.jpg|product_img10_compact1_nau.j', ''),
-(11, 'Caro đen', 'product_img11_den.jpg|product_img11_compact1_den.j', 'S|M|L'),
-(11, 'Caro nâu', 'product_img11.jpg|product_img11_compact1.jpg', 'S|M|L'),
-(12, 'đen', 'product_img12.jpg|product_img12_compact1.jpg|produ', 'S|M|L'),
-(13, 'đen', 'product_img13_den.jpg|product_img13_compact1_den.j', 'S|M|L'),
-(13, 'xanh', 'product_img13.jpg|product_img13_compact1.jpg|produ', 'S|M|L'),
-(14, 'tim', 'product_img14.jpg|product_img14_compact1.jpg|produ', 'S|M|L'),
-(15, 'trang', 'product_img15.jpg|product_img15_compact1.jpg| prod', 'F (Freesize)'),
-(16, 'do', 'product_img16.jpg|product_img16_compact1.jpg|produ', 'S|M|L'),
-(17, 'den', 'product_img17.jpg|product_img17_compact1.jpg|produ', 'S|M|L'),
-(18, 'trang|den', 'product_img18.jpg|product_img18_compact1.jpg| prod', 'S|M|L'),
-(19, 'den', 'product_img19.jpg|product_img19_compact1.jpg|produ', 'S|M|L'),
-(20, 'den|trang', 'product_img20.jpg|product_img20_compact1.jpg|produ', 'S|M|L'),
-(21, 'den', 'product_img21.jpg|product_img21_compact1.jpg|produ', 'L|XL|XXL'),
-(22, 'den', 'product_img22.jpg|product_img22_compact1.jpg|produ', 'S|M|L|XL'),
-(23, 'trang|kem', 'product_img23.jpg|product_img23_compact1.jpg|produ', 'S|M|L'),
-(24, 'den|nau', 'product_img24.jpg|product_img24_compact1.jpg|produ', 'S|M|L'),
-(25, 'den|nau', 'product_img25.jpg|product_img25_compact1.jpg|produ', 'L|XL|XXL'),
-(26, 'trang', 'product_img26.jpg|product_img26_compact1.jpg|produ', ' '),
-(27, 'den', 'product_img27.jpg|product_img27_compact1.jpg|produ', ' '),
-(28, 'den|trang', 'product_img28.jpg|product_img28_compact1.jpg|produ', 'L|XL|XXL'),
-(29, 'xanh|cam|den|kem', 'product_img29.jpg|product_img29_compact1.jpg|produ', 'S|M|L'),
-(30, 'den|kem', 'product_img30.jpg|product_img30_compact1.jpg|produ', 'S|M'),
-(31, 'xanh|kem|den', 'product_img31.jpg|product_img31_compact1.jpg|produ', 'S|M'),
-(32, 'den|trang|kem', 'product_img32.jpg|product_img32_compact1.jpg|produ', 'S');
+(1, 'đen', 'product_img1_den.jpg|product_img1_compact1_den.jpg||product_img1_compact2_den.jpg', 'M|L'),
+(1, 'trắng', 'product_img1.jpg|product_img1_compact1.jpg|product_img1_compact2.jpg', 'M|L'),
+(2, 'trắng', 'product_img2.jpg|product_img2_compact1.jpg|product_img2_compact2.jpg', 'S|M|L|XL|XXL'),
+(2, 'xanh tím than', 'product_img2_xanhtimthan.jpg|product_img2_compact1_xanhtimthan.jpg|product_img2_compact2_xanhtimthan.jpg', 'S|M|L|XL|XXL'),
+(3, 'đỏ', 'product_img3_do.jpg|product_img3_compact1_do.jpg|product_img3_compact2_do.jpg', 'S|M|L'),
+(3, 'kem', 'product_img3.jpg|product_img3_compact1.jpg|product_img3_compact2.jpg', 'S|M|L'),
+(4, 'đen', 'product_img4.jpg|product_img4_compact1.jpg|product_img4_compact2.jpg', '38|39|40|41|42|43'),
+(5, 'be', 'product_img5.jpg|product_img5_compact1.jpg|product_img5_compact2.jpg', 'M|L'),
+(5, 'đen', 'product_img5_den.jpg|product_img5_compact1_den.jpg|product_img5_compact2_den.jpg', 'M|L'),
+(6, 'SB194', 'product_img6.jpg|product_img6_compact1.jpg|product_img6_compact2.jpg', 'S|L|XL'),
+(7, 'be', 'product_img7.jpg|product_img7_compact1.jpg|product_img7_compact2.jpg', 'S|M|L'),
+(7, 'den', 'product_img7_den.jpg|product_img7_compact1_den.jpg|product_img7_compact2_den.jpg', 'S|M|L'),
+(7, 'nau', 'product_img7_nau.jpg|product_img7_compact1_nau.jpg|product_img7_compact2_nau.jpg', 'S|M|L'),
+(8, 'green', 'product_img8.jpg|product_img8_compact1.jpg|product_img8_compact2.jpg', '36|37|38|39|40|41|42|43|44|45|46'),
+(9, 'trangxam', 'product_img9.jpg|product_img9_compact1.jpg|product_img9_compact2.jpg', 'M'),
+(10, 'den', 'product_img10_den.jpg|product_img10_compact1_den.jpg|product_img10_compact2_den.jpg', ' '),
+(10, 'greyblue', 'product_img10.jpg|product_img10_compact1.jpg|product_img10_compact2.jpg', ' '),
+(10, 'nau', 'product_img10_nau.jpg|product_img10_compact1_nau.jpg|product_img10_compact2_nau.jpg', ''),
+(11, 'Caro đen', 'product_img11_den.jpg|product_img11_compact1_den.jpg', 'S|M|L'),
+(11, 'Caro nâu', 'product_img11.jpg|product_img11_compact1.jpg|product_img11_compact2.jpg', 'S|M|L'),
+(12, 'đen', 'product_img12.jpg|product_img12_compact1.jpg|product_img12_compact2.jpg', 'S|M|L'),
+(13, 'đen', 'product_img13_den.jpg|product_img13_compact1_den.jpg||product_img13_compact2_den.jpg', 'S|M|L'),
+(13, 'xanh', 'product_img13.jpg|product_img13_compact1.jpg|product_img13_compact2.jpg', 'S|M|L'),
+(14, 'tim', 'product_img14.jpg|product_img14_compact1.jpg|product_img14_compact2.jpg', 'S|M|L'),
+(15, 'trang', 'product_img15.jpg|product_img15_compact1.jpg| product_img15_compact2.jpg', 'F (Freesize)'),
+(16, 'do', 'product_img16.jpg|product_img16_compact1.jpg|product_img16_compact2.jpg', 'S|M|L'),
+(17, 'den', 'product_img17.jpg|product_img17_compact1.jpg|product_img17_compact2.jpg', 'S|M|L'),
+(18, 'trang|den', 'product_img18.jpg|product_img18_compact1.jpg| product_img18_compact2.jpg', 'S|M|L'),
+(19, 'den', 'product_img19.jpg|product_img19_compact1.jpg|product_img19_compact2.jpg', 'S|M|L'),
+(20, 'den|trang', 'product_img20.jpg|product_img20_compact1.jpg|product_img20_compact2.jpg', 'S|M|L'),
+(21, 'den', 'product_img21.jpg|product_img21_compact1.jpg|product_img21_compact2.jpg', 'L|XL|XXL'),
+(22, 'den', 'product_img22.jpg|product_img22_compact1.jpg|product_img22_compact2.jpg', 'S|M|L|XL'),
+(23, 'trang|kem', 'product_img23.jpg|product_img23_compact1.jpg|product_img23_compact2.jpg', 'S|M|L'),
+(24, 'den|nau', 'product_img24.jpg|product_img24_compact1.jpg|product_img24_compact2.jpg', 'S|M|L'),
+(25, 'den|nau', 'product_img25.jpg|product_img25_compact1.jpg|product_img25_compact2.jpg', 'L|XL|XXL'),
+(26, 'trang', 'product_img26.jpg|product_img26_compact1.jpg|product_img26_compact2.jpg', ' '),
+(27, 'den', 'product_img27.jpg|product_img27_compact1.jpg|product_img27_compact2.jpg', ' '),
+(28, 'den|trang', 'product_img28.jpg|product_img28_compact1.jpg|product_img28_compact2.jpg', 'L|XL|XXL'),
+(29, 'xanh|cam|den|kem', 'product_img29.jpg|product_img29_compact1.jpg|product_img29_compact2.jpg', 'S|M|L'),
+(30, 'den|kem', 'product_img30.jpg|product_img30_compact1.jpg|product_img30_compact2.jpg', 'S|M'),
+(31, 'xanh|kem|den', 'product_img31.jpg|product_img31_compact1.jpg|product_img31_compact2.jpg', 'S|M'),
+(32, 'den|trang|kem', 'product_img32.jpg|product_img32_compact1.jpg|product_img32_compact2.jpg', 'S');
 
 -- --------------------------------------------------------
 
@@ -378,35 +378,36 @@ INSERT INTO `tbl_product_style` (`product_id`, `product_color`, `product_image`,
 --
 
 CREATE TABLE `tbl_product_type` (
-  `product_type_id` int NOT NULL,
-  `product_type_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
+  `product_type_id` int(11) NOT NULL,
+  `product_type_name` varchar(50) NOT NULL,
+  `product_category` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `tbl_product_type`
 --
 
-INSERT INTO `tbl_product_type` (`product_type_id`, `product_type_name`) VALUES
-(1, 'Áo nam'),
-(2, 'Quần nam'),
-(3, 'Vest - Blazer'),
-(4, 'Áo khoác nam'),
-(5, 'Áo nữ'),
-(6, 'Áo dài'),
-(7, 'Áo khoác nữ'),
-(8, 'Quần nữ'),
-(9, 'Đầm'),
-(10, 'Váy'),
-(11, 'Chân váy'),
-(12, 'Quần'),
-(13, 'Áo'),
-(14, 'Mắt kính'),
-(15, 'Giày - Dép'),
-(16, 'Mũ - Nón'),
-(17, 'Vớ - Tất'),
-(18, 'Túi - Ví'),
-(19, 'Thắt lưng'),
-(20, 'Đồng hồ');
+INSERT INTO `tbl_product_type` (`product_type_id`, `product_type_name`, `product_category`) VALUES
+(1, 'Áo nam', 'Nam'),
+(2, 'Quần nam', 'Nam'),
+(3, 'Vest - Blazer', 'Nam'),
+(4, 'Áo khoác nam', 'Nam'),
+(5, 'Áo nữ', 'Nữ'),
+(6, 'Áo dài', 'Nữ'),
+(7, 'Áo khoác nữ', 'Nữ'),
+(8, 'Quần nữ', 'Nữ'),
+(9, 'Đầm', 'Nữ'),
+(10, 'Váy', 'Nữ'),
+(11, 'Chân váy', 'Nữ'),
+(12, 'Quần', 'Nữ'),
+(13, 'Áo', 'Nữ'),
+(14, 'Mắt kính', 'Phụ kiện'),
+(15, 'Giày - Dép', 'Phụ kiện'),
+(16, 'Mũ - Nón', 'Phụ kiện'),
+(17, 'Vớ - Tất', 'Phụ kiện'),
+(18, 'Túi - Ví', 'Phụ kiện'),
+(19, 'Thắt lưng', 'Phụ kiện'),
+(20, 'Đồng hồ', 'Phụ kiện');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -472,43 +473,43 @@ ALTER TABLE `tbl_product_type`
 -- AUTO_INCREMENT cho bảng `tbl_account`
 --
 ALTER TABLE `tbl_account`
-  MODIFY `account_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_account_details`
 --
 ALTER TABLE `tbl_account_details`
-  MODIFY `account_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_comment`
 --
 ALTER TABLE `tbl_comment`
-  MODIFY `comment_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_invoice`
 --
 ALTER TABLE `tbl_invoice`
-  MODIFY `invoice_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_product`
 --
 ALTER TABLE `tbl_product`
-  MODIFY `product_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_product_style`
 --
 ALTER TABLE `tbl_product_style`
-  MODIFY `product_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_product_type`
 --
 ALTER TABLE `tbl_product_type`
-  MODIFY `product_type_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `product_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

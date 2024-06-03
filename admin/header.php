@@ -9,9 +9,9 @@ $success_message = '';
 $error_message1 = '';
 $success_message1 = '';
 
-if (!isset($_SESSION[$ss_admin])) {
-    header('location: login.php');
-    exit;
+if (!isset($_SESSION['user']) || strtolower($_SESSION['user']['account_type']) == 'user') {
+    header('location: ../shop/login.php');
+    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -39,6 +39,8 @@ if (!isset($_SESSION[$ss_admin])) {
 </head>
 
 <body>
+    <?php echo (strtolower($_SESSION['user']['account_type']) == strtolower("user")) ?>
+    <?php echo isset($_SESSION['user']) ?>
     <nav>
         <div class="logo-name">
             <div class="logo-image">
@@ -79,7 +81,7 @@ if (!isset($_SESSION[$ss_admin])) {
 
             <ul class="logout-mode">
                 <li>
-                    <a href="logout.php" id="logout-link">
+                    <a href="../shop/logout.php" id="logout-link">
                         <i class="fa-light fa-arrow-right-from-bracket"></i>
                         <span class="link-name" onclick="">Logout</span>
                     </a>
