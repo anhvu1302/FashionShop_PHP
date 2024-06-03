@@ -34,6 +34,8 @@
 
     <?php
 
+        session_start();
+
         include "library/layout.php";
         include "library/main.php";
         include "library/helper.php";
@@ -50,7 +52,7 @@
     ?>
 
     <section class="products" style="margin-top: 110px">
-        <h1 class="heading"><span>Sản Phẩm </span>Danh Mục</h1>
+        <h1 class="heading"><span>Danh Mục </span>Sản Phẩm</h1>
         <table class="filter-buttons table" style="width: 100%%">
             <?php
 
@@ -82,18 +84,23 @@
             ?>
             </tr>
         </table>
-        <section class="container" style="margin-top: -50px">
+        <div class="container" style="margin-top: -50px">
             <?php
 
-                if($type == -1) $query = "select p.product_id, product_name, product_price, product_discount, product_rating, product_image from tbl_product p inner join tbl_product_style ps on p.product_id = ps.product_id group by p.product_id";
-                else if($type == -2) $query = "select p.product_id, product_name, product_price, product_discount, product_rating, product_image from tbl_product p inner join tbl_product_style ps on p.product_id = ps.product_id inner join tbl_product_type pt on p.product_type_id = pt.product_type_id where product_category = 'Nam' group by p.product_id;";
-                else if($type == -3) $query = "select p.product_id, product_name, product_price, product_discount, product_rating, product_image from tbl_product p inner join tbl_product_style ps on p.product_id = ps.product_id inner join tbl_product_type pt on p.product_type_id = pt.product_type_id where product_category = 'Nữ' group by p.product_id;";
-                else if($type == -4) $query = "select p.product_id, product_name, product_price, product_discount, product_rating, product_image from tbl_product p inner join tbl_product_style ps on p.product_id = ps.product_id inner join tbl_product_type pt on p.product_type_id = pt.product_type_id where product_category = 'Phụ Kiện' group by p.product_id;";
-                else $query = "select p.product_id, product_name, product_price, product_discount, product_rating, product_image from tbl_product p inner join tbl_product_style ps on p.product_id = ps.product_id where product_type_id = $type group by p.product_id";
+                if($type == -1) $query = "select * from tbl_product p inner join tbl_product_style ps on p.product_id = ps.product_id group by p.product_id";
+                else if($type == -2) $query = "select * from tbl_product p inner join tbl_product_style ps on p.product_id = ps.product_id inner join tbl_product_type pt on p.product_type_id = pt.product_type_id where product_category = 'Nam' group by p.product_id;";
+                else if($type == -3) $query = "select * from tbl_product p inner join tbl_product_style ps on p.product_id = ps.product_id inner join tbl_product_type pt on p.product_type_id = pt.product_type_id where product_category = 'Nữ' group by p.product_id;";
+                else if($type == -4) $query = "select * from tbl_product p inner join tbl_product_style ps on p.product_id = ps.product_id inner join tbl_product_type pt on p.product_type_id = pt.product_type_id where product_category = 'Phụ Kiện' group by p.product_id;";
+                else $query = "select * from tbl_product p inner join tbl_product_style ps on p.product_id = ps.product_id where product_type_id = $type group by p.product_id";
 
                 $statement = $connection->prepare($query);
                 $statement->execute();
                 $result = $statement->fetchAll();
+
+                if(sizeof($result) == 0)
+                {
+                    ?><h2 class="heading" style="font-size: 20px">Không Có Sản Phẩm Nào</h2><?php
+                }
 
                 $limit = 8;
                 $start = findStart($limit);
@@ -106,8 +113,8 @@
 
                         <div class="col-md-auto box">
                             <div class="icons">  
-                                <a href="javascript:void(0)" class="fas fa-shopping-cart"></a>
-                                <a href="javascript:void(0)" class="fas fa-heart"></a>
+                                <a href="cart.php" class="fas fa-shopping-cart"></a>
+                                <a href="" class="fas fa-heart"></a>
                                 <a href="details.php?id=<?php echo $item["product_id"] ?>" class="fas fa-eye"></a>
                             </div>
                             <div class="image"><img src="image/product/<?php echo explode('|', $item["product_image"])[0] ?>" alt="<?php echo explode('|', $item["product_image"])[0] ?>"></div>
@@ -122,9 +129,9 @@
                 }
 
             ?>
-        </section>
+        </div>
         <div class="break-page">
-            <?php printPageList($page, $page_number, $type); ?>
+            <?php printPageListType($page, $page_number, $type); ?>
         </div>
     </section>
 

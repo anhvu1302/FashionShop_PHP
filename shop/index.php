@@ -22,6 +22,12 @@
 
     <?php
 
+        session_start();
+
+        // unset($_SESSION["cart"]);
+        // unset($_SESSION["tquantity"]);
+        // unset($_SESSION["tprice"]);
+
         include "library/layout.php";
         include "library/main.php";
         include "library/helper.php";
@@ -40,7 +46,7 @@
         <div class="container" style="margin-top: -50px">
         <?php
 
-            $query = "select p.product_id, product_name, product_price, product_discount, product_rating, product_image from tbl_product p inner join tbl_product_style ps on p.product_id = ps.product_id where product_rating >= 4 group by p.product_id";
+            $query = "select * from tbl_product p inner join tbl_product_style ps on p.product_id = ps.product_id where product_rating >= 4 group by p.product_id";
             $statement = $connection->prepare($query);
             $statement->execute();
             $result = $statement->fetchAll();
@@ -52,8 +58,8 @@
 
                     <div class="col-md-auto box">
                         <div class="icons">  
-                            <a href="javascript:void(0)" class="fas fa-shopping-cart"></a>
-                            <a href="javascript:void(0)" class="fas fa-heart"></a>
+                            <a href="cart.php" class="fas fa-shopping-cart"></a>
+                            <a href="" class="fas fa-heart"></a>
                             <a href="details.php?id=<?php echo $item["product_id"] ?>" class="fas fa-eye"></a>
                         </div>
                         <div class="image"><img src="image/product/<?php echo explode('|', $item["product_image"])[0] ?>" alt="<?php echo explode('|', $item["product_image"])[0] ?>"></div>

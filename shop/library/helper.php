@@ -21,6 +21,44 @@
         return $connection;
     }
 
+    function getSearchUrl($asearch) 
+    {
+        $url_array = explode("?", $_SERVER['REQUEST_URI']);
+        
+        if(empty($url_array[1]))
+        {
+            if($asearch == "active") return $url_array[0];
+            else return $url_array[0] . "?asearch=active";
+        }
+        else 
+        {
+            $url_array[1] = str_replace("asearch=active&", "", $url_array[1]);
+            $url_array[1] = str_replace("asearch=active", "", $url_array[1]);
+
+            if($asearch == "active") return $url_array[0] . "?" . $url_array[1];
+            else return $url_array[0] . "?asearch=active" . "&" . $url_array[1];
+        }
+    }
+
+    function getCartUrl($acart) 
+    {
+        $url_array = explode("?", $_SERVER['REQUEST_URI']);
+        
+        if(empty($url_array[1]))
+        {
+            if($acart == "flex") return $url_array[0];
+            else return $url_array[0] . "?acart=flex";
+        }
+        else 
+        {
+            $url_array[1] = str_replace("acart=flex&", "", $url_array[1]);
+            $url_array[1] = str_replace("acart=flex", "", $url_array[1]);
+
+            if($acart == "flex") return $url_array[0] . "?" . $url_array[1];
+            else return $url_array[0] . "?acart=flex" . "&" . $url_array[1];
+        }
+    }
+
     function renderType($array, $largest)
     {
         for($index = 0; $index < sizeof($array) + 1; $index = $index + 1)

@@ -26,6 +26,8 @@
 
     <?php 
 
+        session_start();
+
         include "library/layout.php";
         include "library/helper.php";
 
@@ -54,7 +56,45 @@
         {
             $color = $product["product_color"];
             $image = isset($_REQUEST["image"]) ? $_REQUEST["image"] : explode("|", $product["product_image"])[0];
-        } 
+        }
+        
+        $cart = isset($_SESSION["cart"]) ? $_SESSION["cart"] : [];
+
+        if(isset($_REQUEST["insert"]))
+        {
+            $query = "select * from tbl_product p inner join tbl_product_style ps on p.product_id = ps.product_id where p.product_id = $id and ps.product_color = '$color'";
+            $statement = $connection->prepare($query);
+            $statement->execute();
+
+            $fetch = $statement->fetch();
+
+            $flag = false;
+            for($index = 0; $index < sizeof($cart); $index = $index + 1)
+            {
+                if($cart[$index][0] == $id && $cart[$index][3] == $color) 
+                {
+                    $flag = true;
+                    $cart[$index][4] = $_REQUEST["size"];
+                    $cart[$index][5] = $_REQUEST["quantity"] + $cart[$index][5];
+                    $cart[$index][7] = $cart[$index][5] * $cart[$index][6];
+                    break;
+                }
+            }
+
+            if(!$flag)
+            {
+                $new_item = [$id, $fetch["product_name"], $image, $color, $_REQUEST["size"], $_REQUEST["quantity"], $fetch["product_price"], $fetch["product_price"] * $_REQUEST["quantity"]];
+                $cart[] = $new_item;
+            }
+        }
+
+        $_SESSION["cart"] = $cart;
+        $_SESSION["tquantity"] = sizeof($_SESSION["cart"]); 
+        $_SESSION["tprice"] = 0;
+        foreach($cart as $stuff)
+        {
+            $_SESSION["tprice"] = $stuff[7] + $_SESSION["tprice"];
+        }
 
         addHeader();
         addFormSign();
@@ -101,7 +141,7 @@
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-12">
-                    <form action="" method="post" class="product-details-right">
+                    <form action="details.php?id=<?php echo $id ?>&color=<?php echo $color ?>" method="post" class="product-details-right">
                         <h1 class="title-product"><?php echo $product["product_name"] ?></h1>
                         <?php echo generatePrice("price", $product["product_price"], $product["product_discount"]) ?>
                         <?php echo generateRating($product["product_rating"]) ?><br>    
@@ -145,7 +185,7 @@
                             <div style="font-size: 16px; text-transform: none; margin-top: 5px"><?php echo showLineBreak($product["product_description"]) ?></div>
                         </div><br>
                         <div class="button_actions">
-                            <button type="submit" class="btn btn_base btn_add_cart btn-cart add_to_cart">
+                            <button type="submit" name="insert" class="btn btn_base btn_add_cart btn-cart add_to_cart">
                                 <i class="fas fa-shopping-cart"></i>
                                 <span style="margin-left: 30px;" class="text_1">Thêm Vào Giỏ Hàng</span>
                             </button>

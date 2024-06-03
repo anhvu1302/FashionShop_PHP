@@ -24,10 +24,16 @@
 
     <?php 
 
-        include("library/layout.php");
+        session_start();
+
+        include "library/layout.php";
+        include "library/helper.php";
+
+        $connection = connectDatabase();
+
+        $cart = isset($_SESSION["cart"]) ? $_SESSION["cart"] : [];
 
         addHeader();
-
         addFormSign();
 
     ?>
@@ -52,3 +58,4 @@
     </div>
 
 </body>
+

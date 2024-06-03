@@ -2,7 +2,14 @@
 
     function addHeader()
     {
+
+        $_SESSION["tquantity"] = isset($_SESSION["tquantity"]) ? $_SESSION["tquantity"] : 0;
+        $_SESSION["tprice"] = isset($_SESSION["tprice"]) ? $_SESSION["tprice"] : 0;
+        
         $connection = connectDatabase();
+
+        $asearch = isset($_REQUEST["asearch"]) ? $_REQUEST["asearch"] : "";
+        $acart = isset($_REQUEST["acart"]) ? $_REQUEST["acart"] : "none";
 
         $query = "select * from tbl_product_type";
         $statement = $connection->prepare($query);
@@ -77,38 +84,51 @@
                 </ul>
             </nav>
             <div class="icons">
-                <div id="menu-btn" class="fas fa-bars"></div>
-                <div id="user-btn" class="fas fa-user"></div>
-                <div id="search-btn" class="fas fa-search"></div>
-                <div id="shopping-cart-btn" class="fas fa-shopping-cart">
-                    <span id="num-of-product-cart">0</span>
-                </div>
-                <div id="heart-btn" class="fas fa-heart" >
-                    <span id="num-of-product-heart">0</span>
-                </div>
+                <a href="" id="menu-btn" style="text-decoration: none" class="fas fa-bars"></a>
+                <a href="" id="user-btn" style="text-decoration: none" class="fas fa-user"></a>
+                <a href="<?php echo getSearchUrl($asearch) ?>" style="text-decoration: none" id="search-btn" class="fas fa-search"></a>
+                <a href="<?php echo getCartUrl($acart) ?>" style="text-decoration: none" class="fas fa-shopping-cart"><span id="num-of-product-cart"><?php echo $_SESSION["tquantity"] ?></span></a>
+                <a href="" style="text-decoration: none" class="fas fa-heart" ><span id="num-of-product-heart">0</span></a>
             </div>
-
-            <form action="" class="search-form">
-                <input type="search" name="" placeholder="search here..." id="search-box" />
-                <label for="search-box" class="fas fa-search"></label>
+            <form action="search.php" method="put" class="search-form <?php echo $asearch ?>">
+                <input type="search" name="search" placeholder="Tìm kiếm..." />
+                <input type="submit" style="background-color: #EB4D4B; color: #ffffff" value="Tìm Kiếm" />
             </form>
             <div class="user-box" style="display:none;">
                 <div class="logout-box">
-                <a class="logout-button">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span>Đăng xuất</span>
-                </a>
+                    <a class="logout-button">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Đăng xuất</span>
+                    </a>
+                </div>
             </div>
-            </div>
-            <ul class="product-cart-box" style="display: none;">
-                <li>
-                    <h1 class="title-product-cart">Giỏ Hàng</h1>
-                </li>
+            <ul class="product-cart-box" style="display: <?php echo $acart ?>;">
+                <li><h1 class="title-product-cart">Giỏ Hàng</h1></li>
+                <?php
 
-                <li>
-                    <span class="total">Tổng: <strong>000.000đ</strong></span>
-                    ${elementCheckout}
-                </li>
+                    $cart = isset($_SESSION["cart"]) ? $_SESSION["cart"] : [];
+
+                    foreach($cart as $item)
+                    {
+                    
+                        ?>
+
+                            <li>
+                                <div class="image"><img src="image/product/<?php echo $item[2] ?>" alt="<?php echo $item[2] ?>"></div>
+                                <div class="item-description">
+                                    <a href="details.php?id=<?php echo $item[0] ?>" class="title-name"><?php echo $item[1] ?></a>
+                                    <p class="title-amount">Số lượng: <span class="amount"><?php echo $item[5] ?></span></p>
+                                </div>
+                                <div class="right">
+                                    <p class="price"><?php echo number_format($item[7], 0, ',', '.') ?></p>
+                                    <p>VNĐ</p>
+                                </div>
+                            </li>
+
+                        <?php
+                    }
+                ?>
+                <li><span class="total">Tổng: <strong><?php echo number_format($_SESSION["tprice"], 0, ',', '.') ?> VNĐ</strong></span><a href="cart.php" style="text-decoration: none" class="checkout btn" id="checkout-btn">CheckOut</a></li>
             </ul>
             <ul class="product-heart-box" style="display: none;">
                 <li>
