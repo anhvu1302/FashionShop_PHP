@@ -5,7 +5,7 @@
         $server = "localhost";
         $database = "fashionshop";
         $username = "root";
-        $password = "123456";
+        $password = "";
         $connection = null;
 
         try

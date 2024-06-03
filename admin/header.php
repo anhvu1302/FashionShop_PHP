@@ -24,8 +24,8 @@ if (!isset($_SESSION['user']) || strtolower($_SESSION['user']['account_type']) =
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/anhvu13/fashion.github.io/main/icon.png" type="image/x-icon" />
     <title>Admin Dashboard Panel</title>
 
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../assets/css/admin.min.css">
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/css/admin.min.css">
     <!-- Icon css -->
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/all.css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-thin.css">
@@ -33,7 +33,7 @@ if (!isset($_SESSION['user']) || strtolower($_SESSION['user']['account_type']) =
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-regular.css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-light.css">
 
-    <script src="../assets/js/jquery.min.js"></script>
+    <script src="./assets/js/jquery.min.js"></script>
 
 
 </head>
@@ -71,7 +71,7 @@ if (!isset($_SESSION['user']) || strtolower($_SESSION['user']['account_type']) =
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="./customer.php">
                         <i class="fa-light fa-user"></i>
                         <span class="link-name">Khách Hàng</span>
                     </a>
