@@ -1,8 +1,8 @@
 <?php
 ob_start();
 session_start();
-include("inc/config.php");
-include("inc/CSRF_Protect.php");
+include("../inc/config.php");
+include("../inc/CSRF_Protect.php");
 $csrf = new CSRF_Protect();
 $error_message = '';
 if (isset($_POST['form1'])) {
