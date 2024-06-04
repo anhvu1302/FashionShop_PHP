@@ -2,9 +2,9 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 31, 2024 lúc 01:27 PM
--- Phiên bản máy phục vụ: 10.4.32-MariaDB
+-- Máy chủ: 127.0.0.1:3306
+-- Thời gian đã tạo: Th6 04, 2024 lúc 09:20 AM
+-- Phiên bản máy phục vụ: 8.0.35
 -- Phiên bản PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -28,67 +28,71 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `tbl_account` (
-  `account_id` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `token` varchar(255) NOT NULL,
-  `account_type` varchar(50) NOT NULL,
-  `is_verified` bit(1) NOT NULL
+  `account_id` int NOT NULL,
+  `username` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `account_type` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_verified` bit(1) NOT NULL,
+  `user_login_status` enum('Logout','Login') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_connection_id` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `tbl_account`
 --
 
-INSERT INTO `tbl_account` (`account_id`, `username`, `password`, `token`, `account_type`, `is_verified`) VALUES
-(1, 'admin', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'admin', b'1'),
-(2, 'admin1', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'admin', b'1'),
-(3, 'admin2', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'admin', b'1'),
-(4, 'customer1', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(5, 'customer2', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(6, 'customer3', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(7, 'customer4', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(8, 'customer5', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(9, 'customer6', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(10, 'customer7', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(11, 'customer8', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(12, 'customer9', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(13, 'customer10', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(14, 'customer11', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(15, 'customer12', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(16, 'customer13', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(17, 'customer14', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(18, 'customer15', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(19, 'customer16', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(20, 'customer17', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(21, 'customer18', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(22, 'customer19', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(23, 'customer20', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(24, 'customer21', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(25, 'customer22', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(26, 'customer23', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(27, 'customer24', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(28, 'customer25', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(29, 'customer26', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(30, 'customer27', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(31, 'customer28', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(32, 'customer29', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(33, 'customer30', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(34, 'customer31', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(35, 'customer32', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(36, 'customer33', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(37, 'customer34', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(38, 'customer35', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(39, 'customer36', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(40, 'customer37', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(41, 'customer38', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(42, 'customer39', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(43, 'customer40', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(44, 'customer41', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(45, 'customer42', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(46, 'customer43', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(47, 'customer44', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1'),
-(48, 'customer45', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1');
+INSERT INTO `tbl_account` (`account_id`, `username`, `password`, `token`, `account_type`, `is_verified`, `user_login_status`, `user_token`, `user_connection_id`) VALUES
+(1, 'admin', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'admin', b'1', 'Logout', '7b58badc729bb1f12e03aa29d6a6a09f', '108'),
+(2, 'admin1', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'admin', b'1', 'Logout', NULL, NULL),
+(3, 'admin2', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'admin', b'1', 'Logout', NULL, NULL),
+(4, 'customer1', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', '9b616449131b225af8f771cc97f1a356', '88'),
+(5, 'customer2', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', '104cf7986542671fd95a014decf3601a', '93'),
+(6, 'customer3', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(7, 'customer4', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(8, 'customer5', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(9, 'customer6', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(10, 'customer7', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(11, 'customer8', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(12, 'customer9', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(13, 'customer10', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(14, 'customer11', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(15, 'customer12', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(16, 'customer13', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(17, 'customer14', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(18, 'customer15', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(19, 'customer16', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(20, 'customer17', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(21, 'customer18', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(22, 'customer19', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(23, 'customer20', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(24, 'customer21', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(25, 'customer22', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(26, 'customer23', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(27, 'customer24', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(28, 'customer25', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(29, 'customer26', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(30, 'customer27', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(31, 'customer28', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(32, 'customer29', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(33, 'customer30', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(34, 'customer31', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(35, 'customer32', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(36, 'customer33', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(37, 'customer34', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(38, 'customer35', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(39, 'customer36', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(40, 'customer37', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(41, 'customer38', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(42, 'customer39', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(43, 'customer40', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(44, 'customer41', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(45, 'customer42', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(46, 'customer43', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(47, 'customer44', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(48, 'customer45', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
+(63, 'admin123', 'e6e061838856bf47e1de730719fb2609', '', 'user', b'1', 'Logout', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -97,13 +101,13 @@ INSERT INTO `tbl_account` (`account_id`, `username`, `password`, `token`, `accou
 --
 
 CREATE TABLE `tbl_account_details` (
-  `account_id` int(11) NOT NULL,
-  `customer_name` varchar(50) NOT NULL,
-  `gender` varchar(10) DEFAULT NULL,
+  `account_id` int NOT NULL,
+  `customer_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gender` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_of_birth` date DEFAULT NULL,
-  `address` varchar(50) DEFAULT NULL,
-  `phone` char(11) DEFAULT NULL,
-  `email` varchar(50) NOT NULL
+  `address` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` char(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -114,7 +118,7 @@ INSERT INTO `tbl_account_details` (`account_id`, `customer_name`, `gender`, `dat
 (1, 'Vũ Văn Anh', 'Nam', '2003-02-13', 'Tây Thạnh, Tân Phú, Thành phố Hồ Chí Minh', '0393222222', 'fashionshop@gmail.com'),
 (2, 'Hà Tri Thủy', 'Nam', '2003-01-17', 'Tân Sơn Nhì, Tân Phú, Thành phố Hồ Chí Minh', '0393222455', 'hatrithuy@gmail.com'),
 (3, 'Nguyễn Bảo Long', 'Nam', '2003-04-24', 'Phường 7, Quận 5, Thành phố Hồ Chí Minh, Việt Nam', '0393555222', 'nguyenbaolong@gmail.com'),
-(4, 'Vũ Văn Anh', 'Nam', '2003-02-13', 'Số 351A Hùng Vương, Phường An Sơn, Tam Kỳ, Quảng N', '0393123456', 'vuvananh@gmail.com'),
+(4, 'Vũ Văn Ann', 'Nam', '2003-02-13', 'Số 351A Hùng Vương, Phường An Sơn, Tam Kỳ, Quảng N', '0393123456', 'vuvananh@gmail.com'),
 (5, 'Trần Thái An', 'Nam', '2003-04-13', 'Ấp 6A, Tam Bình, Vĩnh Long, Việt Nam', '093755621', 'thienhuonglogistics@gmail.com'),
 (6, 'Lê Bích Thủy', 'Nữ', '2003-05-13', 'Hoà Tân, Châu Thành, Đồng Tháp, Việt Nam', '0979598491', 'customer3@gmail.com'),
 (7, 'Trần Mỹ Huyền', 'Nữ', '2003-06-13', 'Mỹ Hoà, Thành phố Long Xuyên, An Giang, Việt Nam', '0979598492', 'vantaiduongviet@gmail.com'),
@@ -158,7 +162,87 @@ INSERT INTO `tbl_account_details` (`account_id`, `customer_name`, `gender`, `dat
 (45, 'Trần Thị Bích Ngọc', 'Nữ', '1995-05-19', '98 Ng. Tất Tố,Phường 19, Bình Thạnh, Thành phố Hồ ', '0393123492', 'customer42@gmail.com'),
 (46, 'Nguyễn Thị Thanh Hương', 'Nữ', '1994-05-12', '1026 Phạm Văn Đồng, Hiệp Bình Chánh, Thủ Đức,', '0393123493', 'customer43@gmail.com'),
 (47, 'Lê Thị Hoài Thu', 'Nữ', '1999-05-14', '27 Lý Thường Kiệt, Phường 7, Quận 11, Thành phố Hồ', '0393163493', 'customer44@gmail.com'),
-(48, 'Phạm Thị Mỹ Linh', 'Nữ', '1996-03-06', '8 Đ. Trường Sa, Phường 17, Bình Thạnh, Thành phố H', '0393123494', 'customer45@gmail.com');
+(48, 'Phạm Thị Mỹ Linh', 'Nữ', '1996-03-06', '8 Đ. Trường Sa, Phường 17, Bình Thạnh, Thành phố H', '0393123494', 'customer45@gmail.com'),
+(63, 'anhh', NULL, NULL, NULL, '0393802528', 'vuvananh010203@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tbl_chat_message`
+--
+
+CREATE TABLE `tbl_chat_message` (
+  `chat_message_id` int NOT NULL,
+  `customer_id` int NOT NULL,
+  `employee_id` int DEFAULT NULL,
+  `chat_message` text NOT NULL,
+  `timestamp` datetime NOT NULL,
+  `status` enum('Yes','No') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `tbl_chat_message`
+--
+
+INSERT INTO `tbl_chat_message` (`chat_message_id`, `customer_id`, `employee_id`, `chat_message`, `timestamp`, `status`) VALUES
+(1, 4, NULL, 'Tôi cần hỗ trợ', '2024-06-03 15:06:08', 'Yes'),
+(2, 4, 1, 'Bạn cần hỗ trợ gì', '2024-06-03 15:07:08', 'Yes'),
+(3, 4, NULL, 'aaaaaaaa', '2024-06-04 10:41:08', 'Yes'),
+(4, 4, NULL, 'aaaaa', '2024-06-04 10:42:32', 'Yes'),
+(5, 4, NULL, 'aaaaa', '2024-06-04 10:54:05', 'Yes'),
+(6, 4, NULL, 'hello', '2024-06-04 10:56:35', 'Yes'),
+(7, 4, NULL, 'tôi', '2024-06-04 11:01:13', 'Yes'),
+(8, 4, NULL, 'giúp tôi', '2024-06-04 11:06:36', 'Yes'),
+(9, 4, NULL, 'được', '2024-06-04 12:49:44', 'Yes'),
+(10, 4, NULL, 'được', '2024-06-04 12:51:05', 'Yes'),
+(11, 4, 1, 'được', '2024-06-04 12:52:43', 'Yes'),
+(12, 4, 1, 'tôi sẽ giúp bạn', '2024-06-04 12:53:58', 'Yes'),
+(13, 4, 1, 'bạn cần gì', '2024-06-04 12:56:03', 'Yes'),
+(14, 4, 1, 'tôi có thể giúp gì\n', '2024-06-04 13:17:19', 'Yes'),
+(15, 4, NULL, 'Hỗ trợ đơn hàng\n', '2024-06-04 13:24:21', 'Yes'),
+(16, 4, 1, 'được', '2024-06-04 13:27:47', 'Yes'),
+(17, 4, 1, 'đ', '2024-06-04 13:29:12', 'Yes'),
+(18, 4, NULL, 'đ', '2024-06-04 13:30:01', 'Yes'),
+(19, 4, NULL, 'đ', '2024-06-04 13:30:16', 'Yes'),
+(20, 4, 1, 'đ', '2024-06-04 13:34:52', 'Yes'),
+(21, 4, 1, 'đ', '2024-06-04 13:40:29', 'Yes'),
+(22, 4, 1, 'đ', '2024-06-04 13:42:29', 'Yes'),
+(23, 4, 1, 'đ', '2024-06-04 13:43:21', 'Yes'),
+(24, 4, 1, 'adadad', '2024-06-04 13:43:32', 'Yes'),
+(25, 4, 1, 'aaaa', '2024-06-04 13:44:29', 'Yes'),
+(26, 4, 1, 'ok', '2024-06-04 13:46:37', 'Yes'),
+(27, 4, NULL, 'a', '2024-06-04 13:46:43', 'Yes'),
+(28, 4, 1, 'ok', '2024-06-04 13:47:34', 'Yes'),
+(29, 4, NULL, 'a', '2024-06-04 13:47:38', 'Yes'),
+(30, 4, NULL, 'a', '2024-06-04 13:47:59', 'Yes'),
+(31, 4, 1, 'ok', '2024-06-04 13:48:06', 'Yes'),
+(32, 4, NULL, 'a', '2024-06-04 13:48:22', 'Yes'),
+(33, 4, 1, 'a', '2024-06-04 13:50:06', 'Yes'),
+(34, 4, 1, 'a', '2024-06-04 13:59:03', 'Yes'),
+(35, 4, 1, 'a', '2024-06-04 13:59:15', 'Yes'),
+(36, 4, NULL, 'a', '2024-06-04 13:59:20', 'Yes'),
+(37, 4, NULL, 'a', '2024-06-04 14:01:41', 'Yes'),
+(38, 4, 1, 'ok', '2024-06-04 14:03:26', 'Yes'),
+(39, 4, NULL, 'h', '2024-06-04 14:03:39', 'Yes'),
+(40, 4, 1, 'a', '2024-06-04 14:03:55', 'Yes'),
+(41, 4, 1, 'a', '2024-06-04 14:04:46', 'Yes'),
+(42, 4, 1, 'a', '2024-06-04 14:07:49', 'Yes'),
+(43, 4, 1, 'Ngáp', '2024-06-04 14:08:09', 'Yes'),
+(44, 5, 1, 'đi', '2024-06-04 14:08:30', 'Yes'),
+(45, 4, 1, 'dd', '2024-06-04 14:10:41', 'Yes'),
+(46, 4, NULL, 'ki', '2024-06-04 14:10:48', 'Yes'),
+(47, 4, NULL, '1', '2024-06-04 14:11:18', 'Yes'),
+(48, 4, NULL, '1', '2024-06-04 14:11:35', 'Yes'),
+(49, 4, NULL, '11', '2024-06-04 14:11:48', 'Yes'),
+(50, 4, 1, 'a', '2024-06-04 14:12:00', 'Yes'),
+(51, 4, 1, 'a', '2024-06-04 14:13:10', 'Yes'),
+(52, 4, NULL, 'a', '2024-06-04 14:13:14', 'Yes'),
+(53, 4, 1, 'a', '2024-06-04 14:14:49', 'Yes'),
+(54, 4, NULL, 'aaaaaa', '2024-06-04 14:14:57', 'Yes'),
+(55, 4, NULL, 'aaaaaaaaaa', '2024-06-04 14:15:38', 'Yes'),
+(56, 4, 1, 'a', '2024-06-04 14:16:29', 'Yes'),
+(57, 4, 1, 'a', '2024-06-04 14:16:42', 'No'),
+(58, 4, NULL, 'a', '2024-06-04 14:16:45', 'Yes');
 
 -- --------------------------------------------------------
 
@@ -167,11 +251,11 @@ INSERT INTO `tbl_account_details` (`account_id`, `customer_name`, `gender`, `dat
 --
 
 CREATE TABLE `tbl_comment` (
-  `comment_id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `rating` int(11) NOT NULL,
-  `comment` varchar(100) NOT NULL
+  `comment_id` int NOT NULL,
+  `customer_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  `rating` int NOT NULL,
+  `comment` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -197,13 +281,13 @@ INSERT INTO `tbl_comment` (`comment_id`, `customer_id`, `product_id`, `rating`, 
 --
 
 CREATE TABLE `tbl_invoice` (
-  `invoice_id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  `total` bigint(20) NOT NULL,
+  `invoice_id` int NOT NULL,
+  `customer_id` int NOT NULL,
+  `total` bigint NOT NULL,
   `date` date NOT NULL,
-  `note` varchar(50) NOT NULL,
-  `address` varchar(200) NOT NULL,
-  `phone` int(11) NOT NULL
+  `note` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -226,11 +310,11 @@ INSERT INTO `tbl_invoice` (`invoice_id`, `customer_id`, `total`, `date`, `note`,
 --
 
 CREATE TABLE `tbl_invoice_details` (
-  `invoice_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `price` bigint(20) NOT NULL,
-  `commented` tinyint(1) NOT NULL DEFAULT 0
+  `invoice_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  `quantity` int NOT NULL,
+  `price` bigint NOT NULL,
+  `commented` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -263,13 +347,13 @@ INSERT INTO `tbl_invoice_details` (`invoice_id`, `product_id`, `quantity`, `pric
 --
 
 CREATE TABLE `tbl_product` (
-  `product_id` int(11) NOT NULL,
-  `product_name` varchar(50) NOT NULL,
-  `product_description` varchar(200) NOT NULL,
-  `product_price` bigint(20) NOT NULL,
-  `product_discount` int(11) NOT NULL,
-  `product_rating` int(11) NOT NULL,
-  `product_type_id` int(11) NOT NULL
+  `product_id` int NOT NULL,
+  `product_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_description` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_price` bigint NOT NULL,
+  `product_discount` int NOT NULL,
+  `product_rating` int NOT NULL,
+  `product_type_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -317,10 +401,10 @@ INSERT INTO `tbl_product` (`product_id`, `product_name`, `product_description`, 
 --
 
 CREATE TABLE `tbl_product_style` (
-  `product_id` int(11) NOT NULL,
-  `product_color` varchar(50) NOT NULL,
-  `product_image` varchar(200) NOT NULL,
-  `product_size` varchar(50) NOT NULL
+  `product_id` int NOT NULL,
+  `product_color` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_image` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_size` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -378,9 +462,9 @@ INSERT INTO `tbl_product_style` (`product_id`, `product_color`, `product_image`,
 --
 
 CREATE TABLE `tbl_product_type` (
-  `product_type_id` int(11) NOT NULL,
-  `product_type_name` varchar(50) NOT NULL,
-  `product_category` varchar(30) NOT NULL
+  `product_type_id` int NOT NULL,
+  `product_type_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_category` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -417,13 +501,23 @@ INSERT INTO `tbl_product_type` (`product_type_id`, `product_type_name`, `product
 -- Chỉ mục cho bảng `tbl_account`
 --
 ALTER TABLE `tbl_account`
-  ADD PRIMARY KEY (`account_id`);
+  ADD PRIMARY KEY (`account_id`),
+  ADD UNIQUE KEY `user_token_UNIQUE` (`user_token`),
+  ADD UNIQUE KEY `user_connection_id_UNIQUE` (`user_connection_id`);
 
 --
 -- Chỉ mục cho bảng `tbl_account_details`
 --
 ALTER TABLE `tbl_account_details`
   ADD PRIMARY KEY (`account_id`);
+
+--
+-- Chỉ mục cho bảng `tbl_chat_message`
+--
+ALTER TABLE `tbl_chat_message`
+  ADD PRIMARY KEY (`chat_message_id`),
+  ADD KEY `FK_chatmessage_account_customer` (`customer_id`),
+  ADD KEY `FK_chatmessage_account_employee` (`employee_id`);
 
 --
 -- Chỉ mục cho bảng `tbl_comment`
@@ -473,43 +567,49 @@ ALTER TABLE `tbl_product_type`
 -- AUTO_INCREMENT cho bảng `tbl_account`
 --
 ALTER TABLE `tbl_account`
-  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `account_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_account_details`
 --
 ALTER TABLE `tbl_account_details`
-  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `account_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+
+--
+-- AUTO_INCREMENT cho bảng `tbl_chat_message`
+--
+ALTER TABLE `tbl_chat_message`
+  MODIFY `chat_message_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_comment`
 --
 ALTER TABLE `tbl_comment`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `comment_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_invoice`
 --
 ALTER TABLE `tbl_invoice`
-  MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `invoice_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_product`
 --
 ALTER TABLE `tbl_product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `product_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_product_style`
 --
 ALTER TABLE `tbl_product_style`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `product_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_product_type`
 --
 ALTER TABLE `tbl_product_type`
-  MODIFY `product_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `product_type_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -520,6 +620,13 @@ ALTER TABLE `tbl_product_type`
 --
 ALTER TABLE `tbl_account_details`
   ADD CONSTRAINT `frn_accountdetails_account` FOREIGN KEY (`account_id`) REFERENCES `tbl_account` (`account_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `tbl_chat_message`
+--
+ALTER TABLE `tbl_chat_message`
+  ADD CONSTRAINT `FK_chatmessage_account_customer` FOREIGN KEY (`customer_id`) REFERENCES `tbl_account` (`account_id`),
+  ADD CONSTRAINT `FK_chatmessage_account_employee` FOREIGN KEY (`employee_id`) REFERENCES `tbl_account` (`account_id`);
 
 --
 -- Các ràng buộc cho bảng `tbl_comment`
