@@ -36,13 +36,16 @@
 
     $cart = isset($_SESSION["cart"]) ? $_SESSION["cart"] : [];
 
-    if (isset($_REQUEST["update"])) {
+    if (isset($_REQUEST["update"])) 
+    {
         $id = $_REQUEST["id"];
         $color = $_REQUEST["color"];
         $quantity = $_REQUEST["quantity"];
 
-        for ($index = 0; $index < sizeof($cart); $index = $index + 1) {
-            if ($cart[$index][0] == $id && $cart[$index][3] == $color) {
+        for ($index = 0; $index < sizeof($cart); $index = $index + 1) 
+        {
+            if ($cart[$index][0] == $id && $cart[$index][3] == $color) 
+            {
                 $cart[$index][5] = $quantity;
                 $cart[$index][7] = $cart[$index][5] * $cart[$index][6];
                 break;
@@ -50,18 +53,19 @@
         }
     }
 
-    if (isset($_REQUEST["delete_id"])) {
+    if (isset($_REQUEST["delete_id"])) 
+    {
         $id = $_REQUEST["delete_id"];
         $color = $_REQUEST["delete_color"];
 
-        if (sizeof($cart) == 1) $cart = [];
-
-        for ($index = 0; $index < sizeof($cart); $index = $index + 1) {
-            if ($cart[$index][0] == $id && $cart[$index][3] == $color) {
-                unset($cart[$index]);
-                break;
-            }
+        $new_cart = [];
+        for ($index = 0; $index < sizeof($cart); $index = $index + 1)
+        {
+            if ($cart[$index][0] == $id && $cart[$index][3] == $color) continue;
+            $new_cart[] = $cart[$index];
         }
+
+        $cart = $new_cart;
     }
 
     $_SESSION["cart"] = $cart;
@@ -76,7 +80,8 @@
 
     ?>
 
-    <section class="product-list-in-cart">
+    <section class="product-list-in-cart" style="display: flex; align-items: center; justify-content: center; flex-direction: column"">
+        <div style="width: 100%;">
         <h1 class="heading">Giỏ Hàng Của Bạn</h1>
         <?php
         if (count($cart) == 0) {
@@ -109,7 +114,7 @@
                         <td><?php echo $item[4] ?></td>
                         <td>
                             <form action="cart.php" method="post">
-                                <input type="number" style="width: 10%" name="quantity" placeholder="<?php echo $item[5] ?>">
+                                <input type="number" style="width: 10%; border: 1px solid gray" name="quantity" placeholder="<?php echo $item[5] ?>">
                                 <input type="hidden" name="id" value="<?php echo $item[0] ?>">
                                 <input type="hidden" name="color" value="<?php echo $item[3] ?>">
                                 <input type="submit" class="btn" name="update" value="Update">
@@ -135,6 +140,7 @@
         <?php
         }
         ?>
+        </div>
     </section>
 
     <?php
