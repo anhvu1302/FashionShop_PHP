@@ -59,7 +59,8 @@
             $result = $statement->fetchAll();
             $result = array_slice($result, 0, 8);
 
-            foreach ($result as $item) {
+            foreach ($result as $item) 
+            {
             ?>
 
                 <div class="col-md-auto box">
@@ -72,7 +73,15 @@
                     <div class="content">
                         <h3 class="title-name"><a href=""><?php echo $item["product_name"] ?></a></h3>
                         <?php echo generatePrice("box-price", $item["product_price"], $item["product_discount"]) ?>
-                        <?php echo generateRating($item["product_rating"]) ?>
+                        <?php
+
+                            $cquery = "select * from tbl_comment where product_id=" . $item["product_id"];
+                            $cstatement = $connection->prepare($cquery);
+                            $cstatement->execute();
+                            $cll = $cstatement->fetchAll();
+
+                        ?>
+                        <?php echo generateRating($item["product_rating"], true, sizeof($cll)) ?>
                     </div>
                 </div>
 
