@@ -29,6 +29,7 @@
     // unset($_SESSION["cart"]);
     // unset($_SESSION["tquantity"]);
     // unset($_SESSION["tprice"]);
+    // unset($_SESSION["user"]);
 
     include "library/layout.php";
     include "library/main.php";
