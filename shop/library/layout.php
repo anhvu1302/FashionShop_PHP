@@ -112,7 +112,7 @@ function addHeader()
                 </a>
             </div>
             <div class="logout-box">
-                <a class="logout-button" href="">
+                <a class="logout-button" href="./MyOrder.php">
                     <i class="fa-solid fa-boxes-stacked"></i>
                     <span>Đơn hàng của tôi</span>
                 </a>

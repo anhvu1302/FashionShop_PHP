@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1:3306
--- Thời gian đã tạo: Th6 04, 2024 lúc 09:20 AM
+-- Thời gian đã tạo: Th6 04, 2024 lúc 02:48 PM
 -- Phiên bản máy phục vụ: 8.0.35
 -- Phiên bản PHP: 8.2.12
 
@@ -47,7 +47,7 @@ INSERT INTO `tbl_account` (`account_id`, `username`, `password`, `token`, `accou
 (1, 'admin', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'admin', b'1', 'Logout', '7b58badc729bb1f12e03aa29d6a6a09f', '108'),
 (2, 'admin1', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'admin', b'1', 'Logout', NULL, NULL),
 (3, 'admin2', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'admin', b'1', 'Logout', NULL, NULL),
-(4, 'customer1', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', '9b616449131b225af8f771cc97f1a356', '88'),
+(4, 'customer1', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', '1b58dc5810e08986fa28d4ec40fef760', '88'),
 (5, 'customer2', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', '104cf7986542671fd95a014decf3601a', '93'),
 (6, 'customer3', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
 (7, 'customer4', 'e6e061838856bf47e1de730719fb2609', '5620ffd5755f0f198166ea7c98c14ffc', 'user', b'1', 'Logout', NULL, NULL),
@@ -282,9 +282,9 @@ INSERT INTO `tbl_comment` (`comment_id`, `customer_id`, `product_id`, `rating`, 
 
 CREATE TABLE `tbl_invoice` (
   `invoice_id` int NOT NULL,
-  `customer_id` int NOT NULL,
+  `customer_id` int DEFAULT NULL,
   `total` bigint NOT NULL,
-  `date` date NOT NULL,
+  `date` datetime NOT NULL,
   `note` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `address` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` int NOT NULL
@@ -295,13 +295,20 @@ CREATE TABLE `tbl_invoice` (
 --
 
 INSERT INTO `tbl_invoice` (`invoice_id`, `customer_id`, `total`, `date`, `note`, `address`, `phone`) VALUES
-(1, 6, 0, '2024-04-01', 'Đã thanh toán', '12 Hai Bà Trưng, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh', 393123456),
-(2, 7, 0, '2024-03-21', 'Đã thanh toán', '98 Ng. Tất Tố,Phường 19, Bình Thạnh, Thành phố Hồ Chí Minh', 393755621),
-(3, 8, 0, '2024-04-01', 'Chờ thanh toán', '1026 Phạm Văn Đồng, Hiệp Bình Chánh, Thủ Đức, Thành phố Hồ Chí Minh', 979598491),
-(4, 45, 0, '2024-04-17', 'Đã thanh toán', '27 Lý Thường Kiệt, Phường 7, Quận 11, Thành phố Hồ Chí Minh', 979951492),
-(5, 4, 0, '2024-04-24', 'Chờ thanh toán', '12 Hai Bà Trưng, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh', 393888888),
-(6, 12, 0, '2024-04-24', 'Đã thanh toán', '8 Đ. Trường Sa, Phường 17, Bình Thạnh, Thành phố Hồ Chí Minh', 979541478),
-(7, 4, 0, '2024-04-24', 'Đã thanh toán', '12 Hai Bà Trưng, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh', 393123456);
+(1, 6, 4415500, '2024-04-01 00:00:00', 'Đã thanh toán', '12 Hai Bà Trưng, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh', 393123456),
+(2, 7, 4415500, '2024-03-21 00:00:00', 'Đã thanh toán', '98 Ng. Tất Tố,Phường 19, Bình Thạnh, Thành phố Hồ Chí Minh', 393755621),
+(3, 8, 4415500, '2024-04-01 00:00:00', 'Chờ thanh toán', '1026 Phạm Văn Đồng, Hiệp Bình Chánh, Thủ Đức, Thành phố Hồ Chí Minh', 979598491),
+(4, 45, 4415500, '2024-04-17 00:00:00', 'Đã thanh toán', '27 Lý Thường Kiệt, Phường 7, Quận 11, Thành phố Hồ Chí Minh', 979951492),
+(5, 4, 4612750, '2024-04-24 00:00:00', 'Chờ thanh toán', '12 Hai Bà Trưng, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh', 393888888),
+(6, 12, 2199000, '2024-04-24 00:00:00', 'Đã thanh toán', '8 Đ. Trường Sa, Phường 17, Bình Thạnh, Thành phố Hồ Chí Minh', 979541478),
+(7, 4, 4415500, '2024-04-24 00:00:00', 'Đã thanh toán', '12 Hai Bà Trưng, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh', 393123456),
+(8, NULL, 2199000, '2024-06-04 00:00:00', 'Chờ thanh toán', '131231aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 393802528),
+(11, NULL, 0, '2024-06-04 00:00:00', 'Chờ thanh toán', '131231aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 393802528),
+(12, NULL, 1319000, '2024-06-04 00:00:00', 'Chờ thanh toán', '131231aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 393802528),
+(13, NULL, 1319000, '2024-06-04 00:00:00', 'Chờ thanh toán', '131231aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 393802528),
+(14, NULL, 3957000, '2024-06-04 00:00:00', 'Đã thanh toán', '131231aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 393802528),
+(15, NULL, 2638000, '2024-06-04 00:00:00', 'Đã thanh toán', 'Phước Lập', 393802528),
+(16, 4, 2199000, '2024-06-04 00:00:00', 'Đã thanh toán', 'Số 351A Hùng Vương, Phường An Sơn, Tam Kỳ, Quảng N', 393123456);
 
 -- --------------------------------------------------------
 
@@ -338,7 +345,13 @@ INSERT INTO `tbl_invoice_details` (`invoice_id`, `product_id`, `quantity`, `pric
 (6, 8, 1, 1319000, 1),
 (7, 2, 2, 2199000, 1),
 (7, 3, 2, 359000, 0),
-(7, 10, 2, 519000, 1);
+(7, 10, 2, 519000, 1),
+(8, 2, 1, 2199000, 0),
+(12, 1, 1, 1319000, 0),
+(13, 1, 1, 1319000, 0),
+(14, 1, 3, 3957000, 0),
+(15, 1, 2, 2638000, 0),
+(16, 2, 1, 2199000, 0);
 
 -- --------------------------------------------------------
 
@@ -591,7 +604,7 @@ ALTER TABLE `tbl_comment`
 -- AUTO_INCREMENT cho bảng `tbl_invoice`
 --
 ALTER TABLE `tbl_invoice`
-  MODIFY `invoice_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `invoice_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_product`
