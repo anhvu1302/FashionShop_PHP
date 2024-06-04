@@ -92,7 +92,7 @@
         return str_replace($demon . "n", "<br>", $string);
     }
 
-    function generateRating($rating) 
+    function generateRating($rating, $show, $ncomment) 
     {
         $html = '<div class="stars">';
 
@@ -100,7 +100,9 @@
 
         for ($index= $rating + 1; $index <= 5; $index = $index + 1) $html = $html . '<i class="far fa-star"></i>';
     
-        $html = $html . '<span> (0)</span></div>';
+        if($show) $html = $html . '<span> ('. $ncomment . ')</span></div>';
+        else $html = $html . '</div>';
+        
         return $html;
     }
 

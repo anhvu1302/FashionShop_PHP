@@ -34,6 +34,8 @@
 
     $connection = connectDatabase();
 
+    $user = isset($_SESSION["user"]) ? $_SESSION["user"] : [];
+
     $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : 0;
 
     $query = "select * from tbl_product p inner join tbl_product_style ps on p.product_id = ps.product_id where p.product_id = $id";
@@ -136,34 +138,44 @@
                     <form action="details.php?id=<?php echo $id ?>&color=<?php echo $color ?>" method="post" class="product-details-right">
                         <h1 class="title-product"><?php echo $product["product_name"] ?></h1>
                         <?php echo generatePrice("price", $product["product_price"], $product["product_discount"]) ?>
-                        <?php echo generateRating($product["product_rating"]) ?><br>
+                        <?php
+
+                            $cquery = "select * from tbl_comment where product_id=$id";
+                            $cstatement = $connection->prepare($cquery);
+                            $cstatement->execute();
+                            $cll = $cstatement->fetchAll();
+
+                        ?>
+                        <?php echo generateRating($product["product_rating"], true, sizeof($cll)) ?><br>
                         <div class="color" style="font-size: 24px;">
                             <div style="margin-right: 20px">Chọn Màu Sắc:</div>
                             <?php
-                            foreach ($all as $item) {
-                            ?><input type="hidden" name="color" value="<?php echo $color ?>"><?php
-                                                                                                    if ($item["product_color"] == $color) echo generateColor(true, $id, $item["product_color"]);
-                                                                                                    else echo generateColor(false, $id, $item["product_color"]);
-                                                                                                }
-                                                                                                    ?>
+                                foreach ($all as $item) 
+                                {
+                                    ?><input type="hidden" name="color" value="<?php echo $color ?>"><?php
+                                    if ($item["product_color"] == $color) echo generateColor(true, $id, $item["product_color"]);
+                                    else echo generateColor(false, $id, $item["product_color"]);
+                                }
+                            ?>
                         </div><br>
                         <div class="size" style="font-size: 24px;">
                             <div style="margin-right: 20px">Chọn Kích Thước:</div>
                             <?php
 
-                            $query = "select product_size from tbl_product_style where product_id = $id and product_color = '$color'";
-                            $statement = $connection->prepare($query);
-                            $statement->execute();
+                                $query = "select product_size from tbl_product_style where product_id = $id and product_color = '$color'";
+                                $statement = $connection->prepare($query);
+                                $statement->execute();
 
-                            $item = $statement->fetch();
-                            $size_array = explode("|", $item["product_size"]);
+                                $item = $statement->fetch();
+                                $size_array = explode("|", $item["product_size"]);
 
-                            ?><select name="size" style="background-color: #F3F2F2; padding-right: 10px"><?php
+                                ?><select name="size" style="background-color: #F3F2F2; padding-right: 10px"><?php
 
-                                                                                                                foreach ($size_array as $size_item) {
-                                                                                                                ?><option value="<?php echo $size_item ?>"><?php echo $size_item ?></option><?php
-                                                                                                                }
-                                                                                                                ?>
+                                foreach ($size_array as $size_item) 
+                                {
+                                    ?><option value="<?php echo $size_item ?>"><?php echo $size_item ?></option><?php
+                                }
+                            ?>
                             </select>
                         </div><br>
                         <div class="quantity" style="font-size: 24px;">
@@ -181,6 +193,131 @@
                             </button>
                         </div>
                     </form>
+                </div>
+            </div>
+            <br><br>
+            <div class="row">
+                <h2 class="heading">Đánh Giá Sản Phẩm</h2>
+                <?php 
+
+                    if(isset($_REQUEST["new_comment"]))
+                    {
+                        $comment = $_REQUEST["comment"];
+                        $rating = $_REQUEST["rating"];
+                        $account_id = $user["account_id"];
+
+                        $query = "select * from tbl_comment where product_id=$id";
+                        $statement = $connection->prepare($query);
+                        $statement->execute();
+
+                        $exists = false;
+
+                        while($scan = $statement->fetch())
+                        {
+                            if($scan["account_id"] == $account_id)
+                            {
+                                $exists = true;
+                                break;
+                            }
+                        }
+
+                        if(!$exists)
+                        {
+                            $query = "insert into tbl_comment (customer_id, product_id, rating, comment) values(?, ?, ?, ?)";
+                            $statement = $connection->prepare($query);
+                            $statement->bindParam(1, $account_id);
+                            $statement->bindParam(2, $id);
+                            $statement->bindParam(3, $rating);
+                            $statement->bindParam(4, $comment);
+    
+                            $statement->execute();
+                        }
+                    }
+
+                    if(sizeof($user) != 0)
+                    {
+                        $account_id = $user["account_id"];
+                        $bought = false;
+                        $query = "select product_id from tbl_invoice i inner join tbl_invoice_details id on i.invoice_id = id.invoice_id where customer_id=$account_id";
+                        $statement = $connection->prepare($query);
+                        $statement->execute();
+
+                        while($scan = $statement->fetch())
+                        {
+                            if($scan["product_id"] == $id) 
+                            {
+                                $bought = true;
+                                $break;
+                            }
+                        }
+
+                        if($bought)
+                        {
+                            ?>
+                                <div class="comment_container">
+                                    <form action="details.php?" method="post" class="comment_form">
+                                        <input type="hidden" name="id" value="<?php echo $id ?>">
+                                        <div class="comment_label">Comment</div>
+                                        <textarea class="comment_box" name="comment" id=""></textarea>
+                                        <div style="display: flex; flex-direction: row; align-items: center;">
+                                            <span class="comment_label" style="margin-right: 10px">Rating</span>
+                                            <span class="star-rating">
+                                                <input type="radio" id="star5" name="rating" value="5"><label for="star5" title="5 stars">★</label>
+                                                <input type="radio" id="star4" name="rating" value="4"><label for="star4" title="4 stars">★</label>
+                                                <input type="radio" id="star3" name="rating" value="3"><label for="star3" title="3 stars">★</label>
+                                                <input type="radio" id="star2" name="rating" value="2"><label for="star2" title="2 stars">★</label>
+                                                <input type="radio" id="star1" name="rating" value="1"><label for="star1" title="1 star">★</label>
+                                            </span>
+                                        </div>  
+                                        <input type="submit" name="new_comment" value="Comment" class="btn"> <br>
+                                    </form>
+                                </div>
+                            <?php
+                        }
+                        else
+                        {
+                            ?><h2 class="heading" style="font-size: 20px">Mua Sản Phẩm Để Đánh Giá</h2><?php
+                        }
+                    }
+                    else
+                    {
+                        ?><h2 class="heading" style="font-size: 20px">Đăng Nhập Để Đánh Giá</h2><?php
+                    }
+
+                ?>
+
+            </div>
+            <br><br>
+            <div class="row">
+                <h2 class="heading">Danh Sách Đánh Giá</h2>
+                <div class="comment_list_conatiner">
+
+                    <?php
+
+                        $query = "select * from tbl_comment inner join tbl_account a on customer_id = account_id inner join tbl_account_details ad on a.account_id = ad.account_id where product_id=$id";
+                        $statement = $connection->prepare($query);
+                        $statement->execute();
+                        $all = $statement->fetchAll();
+
+                        foreach($all as $item)
+                        {
+                            ?>
+
+                                <div class="comment_list">
+                                    <div class="comment_label" style="text-align: center; color: #EB4D4B"><?php echo $item["customer_name"] ?></div>
+                                    <div class="comment_label">Comment</div>
+                                    <div class="comment_box" style="border: none"><?php echo $item["comment"] ?></div><br>
+                                    <div style="display: flex; flex-direction: row; align-items: center;">
+                                        <span class="comment_label" style="margin-right: 10px">Rating</span>
+                                        <span style="color: #FFD700; font-size: 2rem"><?php echo generateRating($item["rating"], false, sizeof($all)) ?></span>
+                                    </div>
+                                </div>
+                                
+
+                            <?php
+                        }
+
+                    ?>
                 </div>
             </div>
         </div>
