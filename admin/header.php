@@ -32,6 +32,8 @@ if (!isset($_SESSION['user']) || strtolower($_SESSION['user']['account_type']) =
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-solid.css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-regular.css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-light.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.css">
+
 
     <script src="./assets/js/jquery.min.js"></script>
 
@@ -76,7 +78,12 @@ if (!isset($_SESSION['user']) || strtolower($_SESSION['user']['account_type']) =
                         <span class="link-name">Khách Hàng</span>
                     </a>
                 </li>
-
+                <li>
+                    <a href="./SupportCustomer.php">
+                        <i class="fa-brands fa-rocketchat"></i>
+                        <span class="link-name">Hỗ trợ khách hàng</span>
+                    </a>
+                </li>
             </ul>
 
             <ul class="logout-mode">

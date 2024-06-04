@@ -1,4 +1,9 @@
 {
+    "autoload": {
+        "psr-4": {
+            "MyApp\\": "socket/"
+        }
+    },
     "require": {
         "phpmailer/phpmailer": "^6.2",
         "cboden/ratchet": "^0.4.3"

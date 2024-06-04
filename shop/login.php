@@ -13,22 +13,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $error_message = 'Tên tài khoản và mật khẩu không được để trống.';
     } else {
         // Query to check the user credentials
-        $statement = $pdo->prepare("SELECT * FROM tbl_account WHERE username = ?");
+        $statement = $pdo->prepare("SELECT * FROM tbl_account a 
+        JOIN tbl_account_details ad ON a.account_id = ad.account_id 
+        WHERE username = ?");
         $statement->execute([$username]);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-        $error_message = $user['is_verified'];
-        if ($user['is_verified'] == 1) {
-            if ($user && ($user['password']==md5($password))) {
-                $_SESSION['user'] = $user;
+        if ($user) {
+            if ($user['is_verified'] == 1) {
+                if ($user['password'] == md5($password)) {
+                    // Generate a new token
+                    $token = md5(time());
 
-                header('Location: index.php');
-                exit();
+                    // Update the user's token in the database
+                    $updateStatement = $pdo->prepare("UPDATE tbl_account SET user_token = ? WHERE username = ?");
+                    $updateStatement->execute([$token, $username]);
+
+                    // Update the user array with the new token and set the session
+                    $user['user_token'] = $token;
+                    $_SESSION['user'] = $user;
+
+                    // Redirect to the index page
+                    header('Location: index.php');
+                    exit();
+                } else {
+                    $error_message = 'Tên tài khoản hoặc mật khẩu không đúng.';
+                }
             } else {
-                $error_message = 'Tên tài khoản hoặc mật khẩu không đúng.';
+                $error_message = 'Tài khoản của bạn đã đăng ký nhưng chưa xác nhận. Vui lòng xác nhận trong email của bạn.';
             }
         } else {
-            $error_message = 'Tài khoản của bạn đã đăng ký nhưng chưa xác nhận. Vui lòng xác nhận trong email của bạn.';
+            $error_message = 'Tên tài khoản hoặc mật khẩu không đúng.';
         }
     }
 }

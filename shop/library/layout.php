@@ -107,7 +107,12 @@ function addHeader()
             <?php
             }
             ?>
-
+            <div class="logout-box">
+                <a class="logout-button" href="./support.php">
+                    <i class="fa-brands fa-rocketchat"></i>
+                    <span>Hỗ trợ khách hàng</span>
+                </a>
+            </div>
             <div class="logout-box">
                 <a class="logout-button" href="">
                     <i class="fa-solid fa-boxes-stacked"></i>
