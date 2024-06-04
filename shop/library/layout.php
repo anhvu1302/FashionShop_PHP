@@ -79,7 +79,7 @@ function addHeader()
         <div class="icons">
             <a href="" id="menu-btn" style="text-decoration: none" class="fas fa-bars"></a>
             <?php if (isset($_SESSION['user'])) : ?>
-                <a id="user-btn" style="text-decoration: none" class="fas fa-user"></a>
+                <a id="user-btn" style="text-decoration: none" class="fas fa-user"><span>Y</span></a>
             <?php else : ?>
                 <a href="./login.php" style="text-decoration: none" class="fas fa-user"></a>
             <?php endif; ?>
