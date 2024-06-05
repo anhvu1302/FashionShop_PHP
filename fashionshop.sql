@@ -178,7 +178,7 @@ CREATE TABLE `tbl_chat_message` (
   `chat_message` text NOT NULL,
   `timestamp` datetime NOT NULL,
   `status` enum('Yes','No') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `tbl_chat_message`

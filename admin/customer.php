@@ -142,6 +142,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
         echo json_encode(['success' => false]);
         exit; // Dừng lại sau khi gửi phản hồi JSON
     }
+    header("Location: customer.php");
+    exit();
 }
 ?>
 <script>
@@ -165,6 +167,7 @@ document.querySelectorAll('.delete-button').forEach(button => {
                 if (data.success) {
                     // Xóa thành công, cập nhật giao diện ngay tại đây (vd: ẩn dòng)
                     this.closest('tr').remove();
+                    window.location.reload();
                     alert('Đã xóa khách hàng thành công.');
                 } else {
                     // Xóa không thành công, hiển thị thông báo lỗi

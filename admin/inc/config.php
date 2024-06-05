@@ -15,7 +15,7 @@ $dbname = 'fashionshop';
 $dbuser = 'root';
 
 // Database Password
-$dbpass = '123456';
+$dbpass = '';
 // $dbpass = '';
 
 //session admin
