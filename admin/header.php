@@ -41,6 +41,10 @@ if (!isset($_SESSION['user']) || strtolower($_SESSION['user']['account_type']) =
 </head>
 
 <body>
+<?php
+    // Lấy tên tệp hiện tại của trang
+    $current_page = basename($_SERVER['PHP_SELF']);
+    ?>
     <?php echo (strtolower($_SESSION['user']['account_type']) == strtolower("user")) ?>
     <?php echo isset($_SESSION['user']) ?>
     <nav>
@@ -55,31 +59,31 @@ if (!isset($_SESSION['user']) || strtolower($_SESSION['user']['account_type']) =
         <div class="menu-items">
             <ul class="nav-links">
                 <li>
-                    <a href="#" class="active">
+                    <a href="#" <?php if ($current_page == 'index.php') echo 'class="active"'; ?>>
                         <i class="fa-light fa-house"></i>
                         <span class="link-name">Dahsboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="./product.php" <?php if ($current_page == 'product.php') echo 'class="active"'; ?>>
                         <i class="fa-light fa-boxes-stacked"></i>
                         <span class="link-name">Sản Phẩm</span>
                     </a>
                 </li>
                 <li>
-                    <a href="./order-management.php">
+                    <a href="./order-management.php"<?php if ($current_page == 'order-management.php') echo 'class="active"'; ?> >
                         <i class="fa-light fa-cart-shopping"></i>
                         <span class="link-name">Đơn Hàng</span>
                     </a>
                 </li>
                 <li>
-                    <a href="./customer.php">
+                    <a href="./customer.php"<?php if ($current_page == 'customer.php') echo 'class="active"'; ?> >
                         <i class="fa-light fa-user"></i>
                         <span class="link-name">Khách Hàng</span>
                     </a>
                 </li>
                 <li>
-                    <a href="./SupportCustomer.php">
+                    <a href="./SupportCustomer.php" <?php if ($current_page == 'SupportCustomer.php') echo 'class="active"'; ?>>
                         <i class="fa-brands fa-rocketchat"></i>
                         <span class="link-name">Hỗ trợ khách hàng</span>
                     </a>

@@ -8,6 +8,7 @@ if (isset($_POST["btnSubmit"])) {
     $token = "5620ffd5755f0f198166ea7c98c14ffc";
     $type = "user";
     $verified = 1;
+    $user_login_status = "Logout";
     $ten_khach_hang = $_POST["txtName"];
     $gioi = $_POST["txtGender"];
     $ngsinh = $_POST["txtDateOfBirth"];
@@ -31,9 +32,9 @@ if (isset($_POST["btnSubmit"])) {
         $tb = "Số điện thoại này đã tồn tại!";
     } else {
         //Xây dựng câu lệnh thêm vào bảng tbl_account
-        $sql = "INSERT INTO tbl_account VALUES(?,?,?,?,?,?)";
+        $sql = "INSERT INTO tbl_account (account_id, username, password, token, account_type, is_verified, user_login_status) VALUES(?,?,?,?,?,?,?)";
         //khai báo tham số truyền các giá trị nhập từ form
-        $param = array($ma_khach_hang, $username, $password, $token, $type, $verified);
+        $param = array($ma_khach_hang, $username, $password, $token, $type, $verified,$user_login_status);
         $sta = $pdo->prepare($sql);
         $sta->execute($param);
         //Lấy mã khách hàng vừa được tạo ở bảng tbl_account
