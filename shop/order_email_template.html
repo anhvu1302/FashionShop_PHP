@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .order-details {
+            margin-bottom: 20px;
+        }
+        .product-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .product-table th, .product-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .product-table th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Xác Nhận Đơn Hàng</h1>
+    <p>Cảm ơn bạn đã đặt hàng, {{customer_name}}!</p>
+    <div class="order-details">
+        <p><strong>Mã đơn hàng:</strong> {{order_id}}</p>
+        <p><strong>Ngày đặt hàng:</strong> {{order_date}}</p>
+    </div>
+    <h2>Chi tiết đơn hàng</h2>
+    <table class="product-table">
+        <thead>
+            <tr>
+                <th>Mã sản phẩm</th>
+                <th>Tên sản phẩm</th>
+                <th>Hình ảnh</th>
+                <th>Số lượng</th>
+                <th>Đơn giá</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{product_list}}
+        </tbody>
+    </table>
+    <p><strong>Tổng tiền:</strong> {{order_total}}</p>
+    <p>Best regards,<br>Fashion Shop</p>
+</body>
+</html>

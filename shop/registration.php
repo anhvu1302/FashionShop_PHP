@@ -88,15 +88,15 @@ if (isset($_POST['form1'])) {
             try {
                 //Server settings
                 $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com'; // Replace with your SMTP server
+                $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'cskhvavshop@gmail.com'; // Replace with your SMTP username
-                $mail->Password = 'frml wcsa qyak jmgu'; // Replace with your SMTP password
+                $mail->Username = 'cskhvavshop@gmail.com';
+                $mail->Password = 'frml wcsa qyak jmgu';
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port = 587;
 
                 //Recipients
-                $mail->setFrom('cskhvavshop@gmail.com', 'Chăm sóc khách hàng shop.'); // Replace with your "From" email and name
+                $mail->setFrom('cskhvavshop@gmail.com', 'Chăm sóc khách hàng shop.'); 
                 $mail->addAddress($to);
 
                 // Content

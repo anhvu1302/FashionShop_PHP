@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .order-details {
+            margin-bottom: 20px;
+        }
+        .product-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .product-table th, .product-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .product-table th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Order Confirmation</h1>
+    <p>Thank you for your order, {{customer_name}}!</p>
+    <div class="order-details">
+        <p><strong>Order ID:</strong> {{order_id}}</p>
+        <p><strong>Order Date:</strong> {{order_date}}</p>
+    </div>
+    <h2>Order Details</h2>
+    <table class="product-table">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{product_list}}
+        </tbody>
+    </table>
+    <p><strong>Total:</strong> ${{order_total}}</p>
+    <p>Best regards,<br>Your Company</p>
+</body>
+</html>
