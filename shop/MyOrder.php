@@ -26,10 +26,6 @@
 
     session_start();
 
-    // unset($_SESSION["cart"]);
-    // unset($_SESSION["tquantity"]);
-    // unset($_SESSION["tprice"]);
-    // unset($_SESSION["user"]);
 
     include "library/layout.php";
     include "library/main.php";
@@ -40,10 +36,10 @@
     addHeader();
 
     ?>
-    <section class="products" style="margin-top: 110px">
+    <section class="products" style="margin-top: 75px">
         <div class="container" style="display: unset;padding: 10rem;">
-            <div class="row text-danger text-center">
-                <h1 class="">Danh sách đơn hàng</h1>
+            <div class="row text-danger text-center mb-5">
+                <h1>Danh sách đơn hàng</h1>
             </div>
 
             <?php
@@ -60,6 +56,17 @@
                             <div class="card-header p-3">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <h3>Đơn hàng: <span class="text-danger"><?php echo $order['invoice_id'] ?></span></h3>
+                                    <div class="d-flex align-items-center gap-5">
+                                        <?php
+                                        if ($order["cancelled"] == "Yes") {
+                                            echo '<h3 class="text-danger text-uppercase">Đã hủy</h3>';
+                                        } else {
+                                            echo '<button class="btn btn-primary m-0 repay" data-payment-method="' . $order['payment_method'] . '" data-order-id="' . $order['invoice_id'] . '" data-amount="' . $order['total'] . '">Thanh toán</button>';
+                                            echo '<h3 class="text-danger text-uppercase m-0">' . $order['note'] . '</h3>';
+                                        }
+                                        ?>
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="card-body">
@@ -81,8 +88,9 @@
                                         <div class="flex-grow-1 align-self-center overflow-hidden row">
                                             <div class="col-6 d-flex align-items-center">
                                                 <h5 class="text-wrap font-size-18">
-                                                    <a href="product_detail/" class="text-dark text-decoration-none"><?php echo $item["product_name"] ?></a>
+                                                    <a href="details.php?id=<?php echo $item["product_id"] ?>" class="text-dark text-decoration-none" target="_blank"><?php echo $item["product_name"] ?></a>
                                                 </h5>
+
                                             </div>
                                             <div class="flex-grow-1 align-self-center overflow-hidden col-6">
                                                 <div class="row">
@@ -92,10 +100,10 @@
                                                             <h5 class="mb-0 mt-2">
                                                                 <span class="text-muted me-2">
                                                                     <del class="font-size-16 fw-normal text-decoration-line-through">
-                                                                    <?php echo number_format($item["product_price"], 0, '', ',')?> VND
+                                                                        <?php echo number_format($item["product_price"], 0, '', ',') ?> VND
                                                                     </del>
                                                                 </span>
-                                                                <?php echo number_format($item["product_price"]*(100-$item["product_discount"])/100, 0, '', ',')?> VND
+                                                                <?php echo number_format($item["product_price"] * (100 - $item["product_discount"]) / 100, 0, '', ',') ?> VND
                                                             </h5>
                                                         </div>
                                                     </div>
@@ -105,7 +113,7 @@
                                                             <h5 class="mb-0 mt-2">
                                                                 <del class="font-size-16 fw-normal">
                                                                     <?php
-                                                                        echo $item['quantity']
+                                                                    echo $item['quantity']
                                                                     ?>
                                                                 </del>
                                                             </h5>
@@ -115,7 +123,7 @@
                                                         <div class="mt-3">
                                                             <p class="text-muted mb-2">Thành tiền</p>
                                                             <h5>
-                                                            <?php echo number_format($item["product_price"]*(100-$item["product_discount"])/100*$item['quantity'], 0, '', ',')?> VND
+                                                                <?php echo number_format($item["product_price"] * (100 - $item["product_discount"]) / 100 * $item['quantity'], 0, '', ',') ?> VND
                                                             </h5>
                                                         </div>
                                                     </div>
@@ -129,7 +137,7 @@
                             </div>
                             <div class="card-footer">
                                 <div class="d-flex justify-content-between ms-2">
-                                    <div>Tổng tiền: <span><?php echo number_format($order['total'], 0, '', ',') ?> VNĐ</span></div>
+                                    <div>Tổng tiền: <span class="text-danger"><?php echo number_format($order['total'], 0, '', ',') ?> VNĐ</span></div>
                                     <ul class="list-inline mb-0 font-size-16">
                                         <li class="list-inline-item">
                                             <a href="#" class="text-muted px-1">
@@ -155,6 +163,32 @@
 
     ?>
     <script src="js/main.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".repay").click(function(event) {
+                event.preventDefault();
+
+                var paymentMethod = $(this).data("payment-method");
+                var orderId = $(this).data("order-id");
+                var amount = $(this).data("amount");
+
+                if (paymentMethod) {
+                    switch (paymentMethod) {
+                        case "VNPAY":
+                            window.location.href = `vnpay_create_payment.php?invoice_id=${orderId}&amount=${amount}`
+                            break;
+                        case "COD":
+                            alert('Vui lòng thanh toán khi nhận hàng.')
+                            break;
+                        default:
+                            console.log("Phương thức thanh toán không được hỗ trợ");
+                    }
+                } else {
+                    console.log("Không có phương thức thanh toán được chọn");
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

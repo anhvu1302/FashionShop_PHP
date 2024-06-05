@@ -36,16 +36,13 @@
 
     $cart = isset($_SESSION["cart"]) ? $_SESSION["cart"] : [];
 
-    if (isset($_REQUEST["update"])) 
-    {
+    if (isset($_REQUEST["update"])) {
         $id = $_REQUEST["id"];
         $color = $_REQUEST["color"];
         $quantity = $_REQUEST["quantity"];
 
-        for ($index = 0; $index < sizeof($cart); $index = $index + 1) 
-        {
-            if ($cart[$index][0] == $id && $cart[$index][3] == $color) 
-            {
+        for ($index = 0; $index < sizeof($cart); $index = $index + 1) {
+            if ($cart[$index][0] == $id && $cart[$index][3] == $color) {
                 $cart[$index][5] = $quantity;
                 $cart[$index][7] = $cart[$index][5] * $cart[$index][6];
                 break;
@@ -53,14 +50,12 @@
         }
     }
 
-    if (isset($_REQUEST["delete_id"])) 
-    {
+    if (isset($_REQUEST["delete_id"])) {
         $id = $_REQUEST["delete_id"];
         $color = $_REQUEST["delete_color"];
 
         $new_cart = [];
-        for ($index = 0; $index < sizeof($cart); $index = $index + 1)
-        {
+        for ($index = 0; $index < sizeof($cart); $index = $index + 1) {
             if ($cart[$index][0] == $id && $cart[$index][3] == $color) continue;
             $new_cart[] = $cart[$index];
         }
@@ -81,7 +76,7 @@
     ?>
 
     <section class="product-list-in-cart" style="display: flex; align-items: center; justify-content: center; flex-direction: column"">
-        <div style="width: 100%;">
+        <div style=" width: 100%;">
         <h1 class="heading">Giỏ Hàng Của Bạn</h1>
         <?php
         if (count($cart) == 0) {
@@ -89,54 +84,68 @@
         } else {
 
         ?>
-            <table class="table">
-                <tr>
-                    <td>Mã</td>
-                    <td>Tên</td>
-                    <td>Hình</td>
-                    <td>Màu</td>
-                    <td>Kích Thước</td>
-                    <td>Số Lượng</td>
-                    <td>Đơn Giá</td>
-                    <td>Tổng Tiền</td>
-                    <td>Hành Động</td>
-                </tr>
-                <?php
-
-                foreach ($cart as $item) {
-                ?>
-
+            <div class="container">
+                <table class="table">
                     <tr>
-                        <td><?php echo $item[0] ?></td>
-                        <td><?php echo $item[1] ?></td>
-                        <td style="width: 10%"><img style="width: 25%; height: 25%" src="image/product/<?php echo $item[2] ?>" alt="<?php echo $item[2] ?>"></td>
-                        <td><?php echo $item[3] ?></td>
-                        <td><?php echo $item[4] ?></td>
-                        <td>
-                            <form action="cart.php" method="post">
-                                <input type="number" style="width: 10%; border: 1px solid gray" name="quantity" placeholder="<?php echo $item[5] ?>">
-                                <input type="hidden" name="id" value="<?php echo $item[0] ?>">
-                                <input type="hidden" name="color" value="<?php echo $item[3] ?>">
-                                <input type="submit" class="btn" name="update" value="Update">
-                            </form>
-                        </td>
-                        <td><?php echo number_format($item[6], 0, ',', '.') ?> VNĐ</td>
-                        <td><?php echo number_format($item[7], 0, ',', '.') ?> VNĐ</td>
-                        <td><a href="cart.php?delete_id=<?php echo $item[0] ?>&delete_color=<?php echo $item[3] ?>" style="text-decoration: none" class="btn">Delete</a></td>
+                        <td>Mã</td>
+                        <td>Tên</td>
+                        <td>Hình</td>
+                        <td>Màu</td>
+                        <td>Kích Thước</td>
+                        <td>Số Lượng</td>
+                        <td>Đơn Giá</td>
+                        <td>Tổng Tiền</td>
+                        <td>Hành Động</td>
                     </tr>
+                    <?php
 
-                <?php
-                }
+                    foreach ($cart as $item) {
+                    ?>
 
-                ?>
-                <tr>
-                    <td colspan="6"></td>
-                    <td>Tổng Số Lượng: <?php echo $_SESSION["tquantity"] ?></td>
-                    <td>Tổng Tiền: <?php echo $_SESSION["tprice"] ?></td>
-                    <td></td>
-                </tr>
-            </table>
-            <div style="display: flex; align-items: center; justify-content: right; margin-bottom: 120px"><a href="checkout.php" style="text-decoration: none; margin-right: 10px" class="btn">Checkout</a></div>
+                        <tr>
+                            <td><?php echo $item[0] ?></td>
+                            <td><?php echo $item[1] ?></td>
+                            <td style="width: 10%"><img style="width: 25%; height: 25%" src="image/product/<?php echo $item[2] ?>" alt="<?php echo $item[2] ?>"></td>
+                            <td><?php echo $item[3] ?></td>
+                            <td><?php echo $item[4] ?></td>
+                            <td>
+                                <form action="cart.php" method="post">
+                                    <input type="number" style="width: 10%; border: 1px solid gray" name="quantity" placeholder="<?php echo $item[5] ?>">
+                                    <input type="hidden" name="id" value="<?php echo $item[0] ?>">
+                                    <input type="hidden" name="color" value="<?php echo $item[3] ?>">
+                                    <input type="submit" class="btn" name="update" value="Update">
+                                </form>
+                            </td>
+                            <td><?php echo number_format($item[6], 0, ',', '.') ?> VNĐ</td>
+                            <td><?php echo number_format($item[7], 0, ',', '.') ?> VNĐ</td>
+                            <td><a href="cart.php?delete_id=<?php echo $item[0] ?>&delete_color=<?php echo $item[3] ?>" style="text-decoration: none" class="btn">Delete</a></td>
+                        </tr>
+
+                    <?php
+                    }
+
+                    ?>
+                    <tr>
+                        <td colspan="4"></td>
+                        <td colspan="2">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    Tổng Số Lượng:
+                                </div>
+                                <div style="width: 170px;">
+                                    <?php echo $_SESSION["tquantity"] ?>
+                                </div>
+                            </div>
+                        </td>
+                        <td colspan="2">Tổng Tiền: <span class="ms-3"><?php echo number_format($_SESSION["tprice"], 0, ',', '.') ?> VNĐ</span></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <div style="display: flex; align-items: center; justify-content: right; margin-bottom: 120px">
+                    <a href="checkout.php" style="text-decoration: none; margin-right: 10px" class="btn">Checkout</a>
+                </div>
+            </div>
+
         <?php
         }
         ?>

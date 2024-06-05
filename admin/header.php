@@ -46,7 +46,7 @@ if (!isset($_SESSION['user']) || strtolower($_SESSION['user']['account_type']) =
     <nav>
         <div class="logo-name">
             <div class="logo-image">
-                <a href="../index.html"><i class="fas fa-shopping-cart"></i></a>
+                <a href="../shop"><i class="fas fa-shopping-cart"></i></a>
             </div>
 
             <span class="logo_name">Admin Panel</span>
@@ -67,7 +67,7 @@ if (!isset($_SESSION['user']) || strtolower($_SESSION['user']['account_type']) =
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="./order-management.php">
                         <i class="fa-light fa-cart-shopping"></i>
                         <span class="link-name">Đơn Hàng</span>
                     </a>

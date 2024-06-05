@@ -957,13 +957,13 @@ section {
 }
 
 .products .container .box .content .box-price .price {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: bolder;
   color: #130f40;
 }
 
 .products .container .box .content .box-price .cut {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   text-decoration: line-through;
   color: #666;
 }

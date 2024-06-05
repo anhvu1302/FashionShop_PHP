@@ -39,33 +39,30 @@ function addHeader()
                             <a href="display.php?type=-2">Đồ Nam</a>
                             <ul>
                                 <?php
-                                    foreach ($male as $item) 
-                                    {
-                                        ?><li><a href="display.php?type=<?php echo $item["product_type_id"] ?>"><?php echo $item["product_type_name"] ?></a></li><?php
-                                    }
-                                ?>
+                                foreach ($male as $item) {
+                                ?><li><a href="display.php?type=<?php echo $item["product_type_id"] ?>"><?php echo $item["product_type_name"] ?></a></li><?php
+                                                                                                                                                        }
+                                                                                                                                                            ?>
                             </ul>
                         </li>
                         <li>
                             <a href="display.php?type=-3">Đồ Nữ</a>
                             <ul>
                                 <?php
-                                    foreach ($female as $item) 
-                                    {
-                                        ?><li><a href="display.php?type=<?php echo $item["product_type_id"] ?>"><?php echo $item["product_type_name"] ?></a></li><?php
-                                    }
-                                ?>
+                                foreach ($female as $item) {
+                                ?><li><a href="display.php?type=<?php echo $item["product_type_id"] ?>"><?php echo $item["product_type_name"] ?></a></li><?php
+                                                                                                                                                        }
+                                                                                                                                                            ?>
                             </ul>
                         </li>
                         <li>
                             <a href="display.php?type=-4">Phụ Kiện</a>
                             <ul>
                                 <?php
-                                    foreach ($accessory as $item) 
-                                    {
-                                        ?><li><a href="display.php?type=<?php echo $item["product_type_id"] ?>"><?php echo $item["product_type_name"] ?></a></li><?php
-                                    }
-                                ?>
+                                foreach ($accessory as $item) {
+                                ?><li><a href="display.php?type=<?php echo $item["product_type_id"] ?>"><?php echo $item["product_type_name"] ?></a></li><?php
+                                                                                                                                                        }
+                                                                                                                                                            ?>
                             </ul>
                         </li>
                     </ul>
@@ -92,17 +89,25 @@ function addHeader()
             <input type="submit" style="background-color: #EB4D4B; color: #ffffff" value="Tìm Kiếm" />
         </form>
         <div class="user-box" id="user-box" style="display:none;">
+            <div class="user-details">
+                <div class="image-user">
+                    <img src="https://raw.githubusercontent.com/anhvu13/fashion.github.io/main/avatarUser.jpg" alt="Avatar" class="avatar">
+                </div>
+                <div class="user-infor">
+                    <h2 class="user-name"><?php echo $_SESSION['user']['customer_name'] ?></h2>
+                    <p class="user-email"><?php echo $_SESSION['user']['email'] ?></p>
+                </div>
+            </div>
             <?php
-            if (strtolower($_SESSION['user']['account_type']) == strtolower("admin")) 
-            {
-                ?>
-                    <div class="logout-box">
-                        <a class="logout-button" href="../admin">
-                            <i class="fa-thin fa-solar-system"></i>
-                            <span>Trang Quản Trị</span>
-                        </a>
-                    </div>
-                <?php
+            if (strtolower($_SESSION['user']['account_type']) == strtolower("admin")) {
+            ?>
+                <div class="logout-box">
+                    <a class="logout-button" href="../admin">
+                        <i class="fa-thin fa-solar-system"></i>
+                        <span>Trang Quản Trị</span>
+                    </a>
+                </div>
+            <?php
             }
             ?>
             <div class="logout-box">

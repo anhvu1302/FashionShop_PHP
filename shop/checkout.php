@@ -14,24 +14,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $customer_id ? $_SESSION["user"]["email"] : $_POST["email"];
         $address = $customer_id ? $_SESSION["user"]["address"] : $_POST["address"];
         $phone = $customer_id ? $_SESSION["user"]["phone"] : $_POST["phone"];
-        $note = "Chờ thanh toán";
         $total = isset($_SESSION["tprice"]) ? $_SESSION["tprice"] : 0;
-        $date = date('Y-m-d');
 
         $cart = isset($_SESSION["cart"]) ? $_SESSION["cart"] : [];
 
         $payment_method = isset($_POST["off_checkout"]) ? "offline" : (isset($_POST["onl_checkout"]) ? "online" : "");
 
-        $query = "INSERT INTO tbl_invoice (customer_id, total, date, note, address, phone) 
-                VALUES (:customer_id, :total, :date, :note, :address, :phone)";
+
+        $query = "INSERT INTO tbl_invoice (customer_id, total, date, note, address, phone,payment_method,cancelled) 
+                VALUES (:customer_id, :total, NOW(),  'Chờ thanh toán', :address, :phone, :payment_method,'No')";
         $statement = $connection->prepare($query);
         $statement->execute([
             'customer_id' => $customer_id,
             'total' => $total,
-            'date' => $date,
-            'note' => $note,
             'address' => $address,
             'phone' => $phone,
+            'payment_method' => $payment_method == "offline" ? "COD" : "VNPAY"
         ]);
 
         $invoice_id = $connection->lastInsertId();

@@ -81,7 +81,7 @@
                             </div>
                             <div class="image"><img src="image/product/<?php echo explode('|', $item["product_image"])[0] ?>" alt="<?php echo explode('|', $item["product_image"])[0] ?>"></div>
                             <div class="content">
-                                <h3 class="title-name"><a href=""><?php echo $item["product_name"] ?></a></h3>
+                            <h3 class="title-name"><span class="text-truncate d-block" title="<?php echo $item["product_name"] ?>" data-bs-toggle="tooltip"><?php echo $item["product_name"] ?></span></h3>
                                 <?php echo generatePrice("box-price", $item["product_price"], $item["product_discount"]) ?>
                                 <?php
 

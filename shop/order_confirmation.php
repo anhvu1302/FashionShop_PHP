@@ -18,12 +18,14 @@ $invoice = $statement->fetch();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Order Confirmation</title>
-    
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 </head>
+
 <body>
     <div class="container">
         <h1>Đơn Hàng Của Bạn Đã Được Đặt Thành Công!</h1>
@@ -33,7 +35,12 @@ $invoice = $statement->fetch();
         <p>Địa chỉ: <?php echo htmlspecialchars($invoice["address"]); ?></p>
         <p>Điện thoại: <?php echo htmlspecialchars($invoice["phone"]); ?></p>
         <p>Ghi chú: <?php echo htmlspecialchars($invoice["note"]); ?></p>
-        <!-- Hiển thị thêm thông tin nếu cần -->
+
+        <div>
+        <a href="./index.php" class="btn btn-success">Trang chủ</a>
     </div>
+    </div>
+
 </body>
+
 </html>

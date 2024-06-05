@@ -60,8 +60,7 @@
             $result = $statement->fetchAll();
             $result = array_slice($result, 0, 8);
 
-            foreach ($result as $item) 
-            {
+            foreach ($result as $item) {
             ?>
 
                 <div class="col-md-auto box">
@@ -72,14 +71,14 @@
                     </div>
                     <div class="image"><img src="image/product/<?php echo explode('|', $item["product_image"])[0] ?>" alt="<?php echo explode('|', $item["product_image"])[0] ?>"></div>
                     <div class="content">
-                        <h3 class="title-name"><a href=""><?php echo $item["product_name"] ?></a></h3>
+                        <h3 class="title-name"><span class="text-truncate d-block" title="<?php echo $item["product_name"] ?>" data-bs-toggle="tooltip"><?php echo $item["product_name"] ?></span></h3>
                         <?php echo generatePrice("box-price", $item["product_price"], $item["product_discount"]) ?>
                         <?php
 
-                            $cquery = "select * from tbl_comment where product_id=" . $item["product_id"];
-                            $cstatement = $connection->prepare($cquery);
-                            $cstatement->execute();
-                            $cll = $cstatement->fetchAll();
+                        $cquery = "select * from tbl_comment where product_id=" . $item["product_id"];
+                        $cstatement = $connection->prepare($cquery);
+                        $cstatement->execute();
+                        $cll = $cstatement->fetchAll();
 
                         ?>
                         <?php echo generateRating($item["product_rating"], true, sizeof($cll)) ?>
